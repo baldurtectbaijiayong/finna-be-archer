@@ -55,5 +55,14 @@ you may not use this file except in compliance with
         <servlet-name>contact</servlet-name>
         <url-pattern>/showContact</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>contactList</servlet-name>
+        <servlet-class>com.bodejidi.ContactListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>contactList</servlet-name>
+        <url-pattern>/contactList</url-pattern>
+    </servlet-mapping>
 
 </web-app>
