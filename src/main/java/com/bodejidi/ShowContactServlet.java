@@ -30,6 +30,8 @@ public class ShowContactServlet extends HttpServlet
         Statement statement = null;
         ResultSet resultSet = null;
 
+        Map map = new HashMap();
+
         if(null == paraId)
         {
             resp.getWriter().println("Contact not find");
@@ -50,8 +52,6 @@ public class ShowContactServlet extends HttpServlet
 
             try
             {
-                Map map = new HashMap();
-
                 connection = DriverManager.getConnection(SQLURL);
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(sql);
@@ -67,12 +67,6 @@ public class ShowContactServlet extends HttpServlet
                 map.put("memo",resultSet.getString("memo"));
                 map.put("job",resultSet.getString("job"));
                 map.put("jobLevel",resultSet.getString("job_level"));
-
-                resp.getWriter().println("contactId :" + map.get("id")); 
-                resp.getWriter().println("name : " + map.get("name"));
-                resp.getWriter().println("mobile :" + map.get("mobile"));
-                resp.getWriter().println("vpmn :" + map.get("vpmn"));
-                resp.getWriter().println("email : " + map.get("email"));    
 
                 System.out.println(resultSet);
             }catch(SQLException ex)
@@ -112,9 +106,13 @@ public class ShowContactServlet extends HttpServlet
                         System.out.println(ex);
                     }
                 }
-            
+ 
+                resp.getWriter().println("contactId :" + map.get("id")); 
+                resp.getWriter().println("name : " + map.get("name"));
+                resp.getWriter().println("mobile :" + map.get("mobile"));
+                resp.getWriter().println("vpmn :" + map.get("vpmn"));
+                resp.getWriter().println("email : " + map.get("email"));    
             } 
-
         }
     } 
 }
