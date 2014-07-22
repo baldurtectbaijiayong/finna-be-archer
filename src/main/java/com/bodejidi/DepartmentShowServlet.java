@@ -34,10 +34,35 @@ public class DepartmentShowServlet extends HttpServlet {
 			resultSet.next();
 			response.getWriter().println(resultSet.getString("name"));
 			response.getWriter().println(connection);
-			connection.close();
+			
 		} catch(SQLException sqle) {
 			response.getWriter().println("cannot connect to db");
 			sqle.printStackTrace();
 		}
+
+		if(resultSet != null) {
+			try{
+				resultSet.close();
+			}catch(Exception ex) {
+				
+			}
+		}
+
+		if(statement != null) {
+			try{
+				statement.close();
+			}catch(Exception ex){
+		
+			}
+		}
+
+		if(connection != null) {
+			try{
+				connection.close();
+			}catch(Exception ex){
+
+			}
+		}
+
 	}
 }
