@@ -19,7 +19,7 @@ public class Contact
     }
     public Long getId()
     {
-        return id;
+        return this.id;
     }
      
     public void setName(String name)
@@ -28,7 +28,7 @@ public class Contact
     }
     public String getName()
     {
-        return name;
+        return this.name;
     }
 
     public void setMobile(String mobile)
@@ -37,7 +37,7 @@ public class Contact
     }
     public String getMobile()
     {
-        return mobile;
+        return this.mobile;
     }
      
     public void setEmail(String email)
@@ -46,7 +46,7 @@ public class Contact
     }
     public String getEmail()
     {
-        return email;
+        return this.email;
     }
           
     public void setHomeAddress(String homeAddress)
@@ -55,7 +55,7 @@ public class Contact
     }
     public String getHomeAddress()
     {
-        return homeAddress;
+        return this.homeAddress;
     }
     public void setOfficeAddress(String officeAddress)
     {
@@ -63,7 +63,7 @@ public class Contact
     }
     public String getOfficeAddress()
     {
-        return officeAddress;
+        return this.officeAddress;
     }
     public void setMemo(String memo)
     {
@@ -71,7 +71,7 @@ public class Contact
     }
     public String getMemo()
     {
-        return memo;
+        return this.memo;
     }
     public void setJob(String job)
     {
@@ -79,7 +79,7 @@ public class Contact
     }
     public String getJob()
     {
-        return job;
+        return this.job;
     }
     public void setJobLevel(String jobLevel)
     {
@@ -87,7 +87,7 @@ public class Contact
     }
     public String getJobLevel()
     {
-        return jobLevel;
+        return this.jobLevel;
     }
 }
 
