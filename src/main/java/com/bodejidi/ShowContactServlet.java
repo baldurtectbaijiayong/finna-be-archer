@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -47,15 +50,30 @@ public class ShowContactServlet extends HttpServlet
 
             try
             {
+                Map map = new HashMap();
+
                 connection = DriverManager.getConnection(SQLURL);
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
-                resp.getWriter().println("contactId :" + resultSet.getInt("id"));
-                resp.getWriter().println("name : " + resultSet.getString("name"));
-                resp.getWriter().println("mobile :" + resultSet.getInt("mobile"));
-                resp.getWriter().println("vpmn :" + resultSet.getInt("vpmn"));
-                resp.getWriter().println("email : " + resultSet.getString("email"));    
+               
+                map.put("id",resultSet.getInt("id"));
+                map.put("name",resultSet.getString("name")); 
+                map.put("moblie",resultSet.getString("mobile"));
+                map.put("vpmn",resultSet.getString("vpmn"));
+                map.put("email",resultSet.getString("email"));
+                map.put("homeAddress",resultSet.getString("home_address"));
+                map.put("officeAddress",resultSet.getString("office_address"));
+                map.put("memo",resultSet.getString("memo"));
+                map.put("job",resultSet.getString("job"));
+                map.put("jobLevel",resultSet.getString("job_level"));
+
+                resp.getWriter().println("contactId :" + map.get("id")); 
+                resp.getWriter().println("name : " + map.get("name"));
+                resp.getWriter().println("mobile :" + map.get("mobile"));
+                resp.getWriter().println("vpmn :" + map.get("vpmn"));
+                resp.getWriter().println("email : " + map.get("email"));    
+
                 System.out.println(resultSet);
             }catch(SQLException ex)
             {
