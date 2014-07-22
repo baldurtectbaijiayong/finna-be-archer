@@ -31,6 +31,8 @@ public class DepartmentShowServlet extends HttpServlet {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from department");
+			
+			
 			resultSet.next();
 			response.getWriter().println(resultSet.getString("name"));
 			response.getWriter().println(connection);
