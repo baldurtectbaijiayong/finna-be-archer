@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 public class DepartmentShowServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -16,8 +18,8 @@ public class DepartmentShowServlet extends HttpServlet {
 		response.getWriter().println("Show");
 
 		Connection connection = null;
-		//Statement statement = null;
-		//ResultSet resultSet = null;
+		Statement statement = null;
+	    ResultSet resultSet = null;
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -27,7 +29,10 @@ public class DepartmentShowServlet extends HttpServlet {
 
 		try{
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-			//jdbc:mysql://localhost/test?user=root&password=");
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select * from department");
+			resultSet.next();
+			response.getWriter().println(resultSet.getString("name"));
 			response.getWriter().println(connection);
 			connection.close();
 		} catch(SQLException sqle) {
