@@ -20,8 +20,8 @@ public class ShowContactServlet extends HttpServlet
         + "user=root&password=";
 
         Connection connection = null;
-        //Long id = Long.valueOf(req.getParameter("ContactId"));
-
+        Long id = Long.valueOf(req.getParameter("ContactId"));
+        resp.getWriter().println(id);
         try
         {
             Class.forName(SQLDriver).newInstance();    
