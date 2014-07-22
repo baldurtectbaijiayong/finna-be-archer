@@ -21,8 +21,7 @@ public class ContactListServlet extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
-
-            response.getWriter().println("All Contacts");
+            
             String sql = "select contact.name,contact.mobile,department.name from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
             
             List contacts = new ArrayList();            
@@ -78,13 +77,11 @@ public class ContactListServlet extends HttpServlet{
 
                 }
             }
-            for(Object obj: contacts){
+            request.setAttribute("contactList",contacts);
+            getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/ContactList.jsp")
+                .forward(request,response);
 
-                Map contact = (Map) obj;
-                response.getWriter().println("Name:" + contact.get("name"));
-                response.getWriter().println("mobile:" + contact.get("mobile"));
-                response.getWriter().println("department:" + contact.get("department"));
-            }   
     }
 
 }
