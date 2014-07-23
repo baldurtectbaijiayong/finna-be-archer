@@ -19,7 +19,7 @@ public class DepartmentShowServlet extends HttpServlet {
 
 		Connection connection = null;
 		Statement statement = null;
-	    ResultSet resultSet = null;
+		ResultSet resultSet = null;
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -32,10 +32,9 @@ public class DepartmentShowServlet extends HttpServlet {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from department");
 			
-			
-			resultSet.next();
-			response.getWriter().println(resultSet.getString("name"));
-			response.getWriter().println(connection);
+			while(resultSet.next()){
+				response.getWriter().println(resultSet.getString("name"));
+			}
 			
 		} catch(SQLException sqle) {
 			response.getWriter().println("cannot connect to db");
