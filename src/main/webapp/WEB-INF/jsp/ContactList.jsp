@@ -1,4 +1,4 @@
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.List,com.bodejidi.Contact"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <% 
 List contactList = (List) request.getAttribute("contactList");

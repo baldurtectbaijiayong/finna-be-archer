@@ -12,7 +12,7 @@ public class Contact
     private String memo;
     private String job;
     private String jobLevel;
-	private String department;
+    private String department;
 
     public void setId(Long id)
     {
@@ -90,13 +90,13 @@ public class Contact
     {
         return this.jobLevel;
     }
-	public void setDepartment(String department)
-	{
-		this.department = department;
-	}
-	public String getDepartment()
-	{
-		return this.department;
-	}
+    public void setDepartment(String department)
+    {
+        this.department = department;
+    }
+    public String getDepartment()
+    {
+        return this.department;
+    }
 }
 

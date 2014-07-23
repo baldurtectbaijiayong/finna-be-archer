@@ -22,7 +22,7 @@ public class ContactListServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
             
-            String sql = "select contact.name,contact.mobile,department.name from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
+            String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
             
             List contacts = new ArrayList();            
 
@@ -41,11 +41,12 @@ public class ContactListServlet extends HttpServlet{
                 resultSet = statement.executeQuery(sql);
                 
                 while (resultSet.next()){
-                    Map contact = new HashMap();
-
-                    contact.put("name",resultSet.getString("contact.name"));
-                    contact.put("mobile",resultSet.getString("contact.mobile"));
-                    contact.put("department",resultSet.getString("department.name"));
+                    //Map contact = new HashMap();
+					Contact contact = new Contact();
+					
+                    contact.setName(resultSet.getString("contact.name"));
+                    contact.setMobile(resultSet.getString("contact.mobile"));
+                    contact.setDepartment(resultSet.getString("department.name"));
 
                     contacts.add(contact);
                 }
