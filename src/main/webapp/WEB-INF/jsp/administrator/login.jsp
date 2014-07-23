@@ -4,9 +4,9 @@
   </head>
   <body>
     <h1>Administrator Login</h1>
-    <form >
+    <form method="POST">
       <label>username <input type="text" name="username"/></label><br/>
-      <label>password<input type="text" name="password"/></label><br/>
+      <label>password<input type="password" name="password"/></label><br/>
       <input type="submit" value="login"/><br/>
     </form>
   </body>
