@@ -69,6 +69,11 @@ public class ShowContactServlet extends HttpServlet
                 contact.setJobLevel(resultSet.getString("job_level"));
 
                 System.out.println(resultSet);
+                req.setAttribute("contact",contact);
+                
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/showContact.jsp")
+                    .forward(req, resp);
                 
             }catch(SQLException ex)
             {
@@ -107,12 +112,6 @@ public class ShowContactServlet extends HttpServlet
                         System.out.println(ex);
                     }
                 }
- 
-                resp.getWriter().println("contactId :" + contact.getId()); 
-                resp.getWriter().println("name : " + contact.getName());
-                resp.getWriter().println("mobile :" + contact.getMobile());
-                resp.getWriter().println("vpmn :" + contact.getVpmn());
-                resp.getWriter().println("email : " + contact.getEmail());    
             } 
         }
     } 
