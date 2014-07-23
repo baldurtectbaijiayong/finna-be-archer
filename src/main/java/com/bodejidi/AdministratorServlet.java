@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 public class AdministratorServlet extends HttpServlet { 
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws IOException, ServletException {
-        response.getWriter().println("Admin"); 
+        getServletContext()
+            .getRequestDispatcher("/WEB-INF/jsp/administrator/login.jsp")
+            .forward(request, response);
     } 
 } 
 
