@@ -30,8 +30,8 @@ public class ShowContactServlet extends HttpServlet
         Statement statement = null;
         ResultSet resultSet = null;
 
-        Map map = new HashMap();
-
+        Contact contact = new Contact();
+        
         if(null == paraId)
         {
             resp.getWriter().println("Contact not find");
@@ -57,18 +57,19 @@ public class ShowContactServlet extends HttpServlet
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
                
-                map.put("id",resultSet.getInt("id"));
-                map.put("name",resultSet.getString("name")); 
-                map.put("moblie",resultSet.getString("mobile"));
-                map.put("vpmn",resultSet.getString("vpmn"));
-                map.put("email",resultSet.getString("email"));
-                map.put("homeAddress",resultSet.getString("home_address"));
-                map.put("officeAddress",resultSet.getString("office_address"));
-                map.put("memo",resultSet.getString("memo"));
-                map.put("job",resultSet.getString("job"));
-                map.put("jobLevel",resultSet.getString("job_level"));
+                contact.setId(resultSet.getLong("id"));
+                contact.setName(resultSet.getString("name")); 
+                contact.setMobile(resultSet.getString("mobile"));
+                contact.setVpmn(resultSet.getString("vpmn"));
+                contact.setEmail(resultSet.getString("email"));
+                contact.setHomeAddress(resultSet.getString("home_address"));
+                contact.setOfficeAddress(resultSet.getString("office_address"));
+                contact.setMemo(resultSet.getString("memo"));
+                contact.setJob(resultSet.getString("job"));
+                contact.setJobLevel(resultSet.getString("job_level"));
 
                 System.out.println(resultSet);
+                
             }catch(SQLException ex)
             {
                 System.out.println("SQLException: " + ex.getMessage());
@@ -107,11 +108,11 @@ public class ShowContactServlet extends HttpServlet
                     }
                 }
  
-                resp.getWriter().println("contactId :" + map.get("id")); 
-                resp.getWriter().println("name : " + map.get("name"));
-                resp.getWriter().println("mobile :" + map.get("mobile"));
-                resp.getWriter().println("vpmn :" + map.get("vpmn"));
-                resp.getWriter().println("email : " + map.get("email"));    
+                resp.getWriter().println("contactId :" + contact.getId()); 
+                resp.getWriter().println("name : " + contact.getName());
+                resp.getWriter().println("mobile :" + contact.getMobile());
+                resp.getWriter().println("vpmn :" + contact.getVpmn());
+                resp.getWriter().println("email : " + contact.getEmail());    
             } 
         }
     } 
