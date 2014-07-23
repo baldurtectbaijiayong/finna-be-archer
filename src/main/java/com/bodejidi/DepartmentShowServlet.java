@@ -77,12 +77,10 @@ public class DepartmentShowServlet extends HttpServlet {
 
 			}
 		}
-	
-		for(Department department:departments) {
-			response.getWriter().println(department.getName());
-			response.getWriter().println(department.getMemo());
-			response.getWriter().println(department.getParent());
-			response.getWriter().println(department.getAddress());	
-		}
+
+		request.setAttribute("departmentList", departments);
+		getServletContext()
+			.getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
+			.forward(request, response);
 	}
 }
