@@ -25,7 +25,7 @@ public class DepartmentShowServlet extends HttpServlet {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List contacts = new ArrayList();
+		List<Department> departments = new ArrayList();
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -39,14 +39,14 @@ public class DepartmentShowServlet extends HttpServlet {
 			resultSet = statement.executeQuery("select * from department");
 
 			while(resultSet.next()){
-				Map contact = new HashMap();
+				Department department = new Department();
 
-				contact.put("name", resultSet.getString("name"));
-				contact.put("memo", resultSet.getString("memo"));
-				contact.put("parent", resultSet.getString("parent"));
-				contact.put("address", resultSet.getString("address"));	
+				department.setName(resultSet.getString("name"));
+				department.setMemo(resultSet.getString("memo"));
+				department.setParent(resultSet.getString("parent"));
+				department.setAddress(resultSet.getString("address"));	
 				
-				contacts.add(contact);
+				departments.add(department);
 			}
 			
 		} catch(SQLException sqle) {
@@ -78,13 +78,11 @@ public class DepartmentShowServlet extends HttpServlet {
 			}
 		}
 	
-		for(Object obj:contacts) {
-			Map contact = (Map) obj;
-
-			response.getWriter().println(contact.get("name"));
-			response.getWriter().println(contact.get("memo"));
-			response.getWriter().println(contact.get("parent"));
-			response.getWriter().println(contact.get("address"));	
+		for(Department department:departments) {
+			response.getWriter().println(department.getName());
+			response.getWriter().println(department.getMemo());
+			response.getWriter().println(department.getParent());
+			response.getWriter().println(department.getAddress());	
 		}
 	}
 }
