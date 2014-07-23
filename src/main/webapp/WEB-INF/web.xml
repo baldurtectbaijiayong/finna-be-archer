@@ -67,14 +67,22 @@ you may not use this file except in compliance with
         <url-pattern>/contactList</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>departmentShow</servlet-name>
-	<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>departmentshow</servlet-name>
+		<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>departmentshow</servlet-name>
+		<url-pattern>/department/show</url-pattern>
+	</servlet-mapping>
 
-  <servlet-mapping>
-	<servlet-name>departmentShow</servlet-name>
-	<url-pattern>/department/show</url-pattern>
-  </servlet-mapping>
+	 <servlet>
+		<servlet-name>departmentlist</servlet-name>
+		<servlet-class>com.bodejidi.DepartmentListServlet</servlet-class>
+	 </servlet>
+	<servlet-mapping>
+		<servlet-name>departmentlist</servlet-name>
+		<url-pattern>/department/list</url-pattern>
+	</servlet-mapping>
 
 </web-app>

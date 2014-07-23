@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class DepartmentShowServlet extends HttpServlet {
+public class DepartmentListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 		response.getWriter().println("Show");
