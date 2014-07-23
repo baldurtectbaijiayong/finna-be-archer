@@ -36,7 +36,8 @@ public class DepartmentShowServlet extends HttpServlet {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from department");
-			
+			List contacts = new ArrayList();
+
 			while(resultSet.next()){
 				Map contact = new HashMap();
 
@@ -44,7 +45,9 @@ public class DepartmentShowServlet extends HttpServlet {
 				contact.put("memo", resultSet.getString("memo"));
 				contact.put("parent", resultSet.getString("parent"));
 				contact.put("address", resultSet.getString("address"));	
-
+				
+				contacts.add(contact);
+				
 				response.getWriter().println(resultSet.getString("name"));
 			}
 			
