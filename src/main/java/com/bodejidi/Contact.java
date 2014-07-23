@@ -90,13 +90,13 @@ public class Contact
     {
         return this.jobLevel;
     }
-	public void setDepartment(String department)
-	{
-		this.department = department;
-	}
-	public String getDepartment()
-	{
-		return this.department;
-	}
+    public void setDepartment(String department)
+    {
+         this.department = department;
+    }
+    public String getDepartment()
+    {
+        return this.department;
+    }
 }
 
