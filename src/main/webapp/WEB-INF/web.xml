@@ -76,5 +76,15 @@ you may not use this file except in compliance with
 	<servlet-name>departmentShow</servlet-name>
 	<url-pattern>/department/show</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AdminShowContact</servlet-name>
+    <servlet-class>com.bodejidi.AdminShowContactServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AdminShowContact</servlet-name>
+    <url-pattern>/admin/showcontact</url-pattern>
+  </servlet-mapping>
 
 </web-app>
