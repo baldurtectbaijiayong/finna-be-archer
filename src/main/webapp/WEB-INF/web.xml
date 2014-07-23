@@ -47,10 +47,12 @@ you may not use this file except in compliance with
     <description>
         Welcome to Tomcat
     </description>
+
     <servlet>
         <servlet-name>contact</servlet-name>
         <servlet-class>com.bodejidi.ShowContactServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>contact</servlet-name>
         <url-pattern>/showContact</url-pattern>
@@ -64,5 +66,15 @@ you may not use this file except in compliance with
         <servlet-name>contactList</servlet-name>
         <url-pattern>/contactList</url-pattern>
     </servlet-mapping>
+
+  <servlet>
+    <servlet-name>departmentShow</servlet-name>
+	<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>departmentShow</servlet-name>
+	<url-pattern>/department/show</url-pattern>
+  </servlet-mapping>
 
 </web-app>
