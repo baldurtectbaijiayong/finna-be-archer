@@ -80,7 +80,7 @@ public class ContactListServlet extends HttpServlet{
             }
             request.setAttribute("contactList",contacts);
             getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/ContactList.jsp")
+                .getRequestDispatcher("/WEB-INF/jsp/contact/ContactList.jsp")
                 .forward(request,response);
 
     }

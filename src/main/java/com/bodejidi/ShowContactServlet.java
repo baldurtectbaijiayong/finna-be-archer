@@ -72,7 +72,7 @@ public class ShowContactServlet extends HttpServlet
                 req.setAttribute("contact",contact);
                 
                 getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/showContact.jsp")
+                    .getRequestDispatcher("/WEB-INF/jsp/contact/showContact.jsp")
                     .forward(req, resp);
                 
             }catch(SQLException ex)
