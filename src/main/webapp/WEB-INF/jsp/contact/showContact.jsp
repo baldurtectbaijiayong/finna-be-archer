@@ -1,7 +1,7 @@
-<%@ page import = java.util.List, com.bodejidi.Contact%>
+<%@ page import = "com.bodejidi.Contact"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <%
-Contact contact = request.getAttribute("contact");
+Contact contact = (Contact)request.getAttribute("contact");
 %>
 <html>
     <head>
@@ -14,7 +14,6 @@ Contact contact = request.getAttribute("contact");
                 <td>name</td>
                 <td>${contact.name}</td>
             </tr>
-            <tr>
                 <td>mobile</td>
                 <td>${contact.mobile}</td>
             </tr>    
