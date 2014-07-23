@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
 public class DepartmentShowServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -19,7 +24,8 @@ public class DepartmentShowServlet extends HttpServlet {
 
 		Connection connection = null;
 		Statement statement = null;
-	    ResultSet resultSet = null;
+		ResultSet resultSet = null;
+		List<Department> departments = new ArrayList();
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -31,11 +37,17 @@ public class DepartmentShowServlet extends HttpServlet {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from department");
-			
-			
-			resultSet.next();
-			response.getWriter().println(resultSet.getString("name"));
-			response.getWriter().println(connection);
+
+			while(resultSet.next()){
+				Department department = new Department();
+
+				department.setName(resultSet.getString("name"));
+				department.setMemo(resultSet.getString("memo"));
+				department.setParent(resultSet.getString("parent"));
+				department.setAddress(resultSet.getString("address"));	
+				
+				departments.add(department);
+			}
 			
 		} catch(SQLException sqle) {
 			response.getWriter().println("cannot connect to db");
@@ -66,5 +78,9 @@ public class DepartmentShowServlet extends HttpServlet {
 			}
 		}
 
+		request.setAttribute("departmentList", departments);
+		getServletContext()
+			.getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
+			.forward(request, response);
 	}
 }

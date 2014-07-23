@@ -40,6 +40,15 @@ public class Contact
     {
         return this.mobile;
     }
+
+    public void setVpmn(String vpmn)
+    {
+        this.vpmn = vpmn;
+    }
+    public String getVpmn()
+    {
+        return this.vpmn;
+    }
      
     public void setEmail(String email)
     {
@@ -93,6 +102,7 @@ public class Contact
     public void setDepartment(String department)
     {
         this.department = department;
+
     }
     public String getDepartment()
     {
