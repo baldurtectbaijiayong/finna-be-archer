@@ -25,6 +25,7 @@ public class DepartmentShowServlet extends HttpServlet {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
+		List contacts = new ArrayList();
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -36,7 +37,6 @@ public class DepartmentShowServlet extends HttpServlet {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from department");
-			List contacts = new ArrayList();
 
 			while(resultSet.next()){
 				Map contact = new HashMap();
@@ -47,8 +47,6 @@ public class DepartmentShowServlet extends HttpServlet {
 				contact.put("address", resultSet.getString("address"));	
 				
 				contacts.add(contact);
-				
-				response.getWriter().println(resultSet.getString("name"));
 			}
 			
 		} catch(SQLException sqle) {
@@ -79,6 +77,14 @@ public class DepartmentShowServlet extends HttpServlet {
 
 			}
 		}
+	
+		for(Object obj:contacts) {
+			Map contact = (Map) obj;
 
+			response.getWriter().println(contact.get("name"));
+			response.getWriter().println(contact.get("memo"));
+			response.getWriter().println(contact.get("parent"));
+			response.getWriter().println(contact.get("address"));	
+		}
 	}
 }
