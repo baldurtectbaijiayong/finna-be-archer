@@ -67,6 +67,7 @@ you may not use this file except in compliance with
         <url-pattern>/contactList</url-pattern>
     </servlet-mapping>
 
+<<<<<<< HEAD
     <servlet>
         <servlet-name>departmentShow</servlet-name>
         <servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
@@ -87,5 +88,26 @@ you may not use this file except in compliance with
         <url-pattern>/administrator/login</url-pattern>
     </servlet-mapping>
     
+=======
+  <servlet>
+    <servlet-name>departmentShow</servlet-name>
+	<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>departmentShow</servlet-name>
+	<url-pattern>/department/show</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AdminShowContact</servlet-name>
+    <servlet-class>com.bodejidi.AdminShowContactServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AdminShowContact</servlet-name>
+    <url-pattern>/admin/showcontact</url-pattern>
+  </servlet-mapping>
+>>>>>>> bdadd1aa35e5b1b4d901b60ea6f84db29f556c2a
 
 </web-app>
