@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+
 public class DepartmentShowServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -33,6 +38,13 @@ public class DepartmentShowServlet extends HttpServlet {
 			resultSet = statement.executeQuery("select * from department");
 			
 			while(resultSet.next()){
+				Map contact = new HashMap();
+
+				contact.put("name", resultSet.getString("name"));
+				contact.put("memo", resultSet.getString("memo"));
+				contact.put("parent", resultSet.getString("parent"));
+				contact.put("address", resultSet.getString("address"));	
+
 				response.getWriter().println(resultSet.getString("name"));
 			}
 			
