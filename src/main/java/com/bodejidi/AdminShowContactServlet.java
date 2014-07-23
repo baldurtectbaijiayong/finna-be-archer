@@ -16,6 +16,8 @@ public class AdminShowContactServlet extends HttpServlet{
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
         
+        Contact contact = new Contact();
+        
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -31,8 +33,16 @@ public class AdminShowContactServlet extends HttpServlet{
             statement = connection.createStatement();
             resultSet = statement.executeQuery("select * from contact where id=" + request.getParameter("contactId"));      
             resultSet.next();
-            response.getWriter().println("name:" + resultSet.getString("Name"));  
-            response.getWriter().println("mobile" + resultSet.getString("Mobile"));
+            contact.setId(resultSet.getLong("id"));
+            contact.setName(resultSet.getString("name"));
+            contact.setMobile(resultSet.getString("mobile"));
+            contact.setVpmn(resultSet.getString("vpmn"));
+            contact.setEmail(resultSet.getString("email"));
+            contact.setHomeAddress(resultSet.getString("home_address"));
+            contact.setOfficeAddress(resultSet.getString("office_address"));
+            contact.setMemo(resultSet.getString("memo"));
+            contact.setJob(resultSet.getString("job"));
+            contact.setJobLevel(resultSet.getString("job_level"));
         }catch(SQLException sqle){
             response.getWriter().println("can not connect to DB");
             response.getWriter().println(sqle.getMessage());
@@ -62,5 +72,16 @@ public class AdminShowContactServlet extends HttpServlet{
             
             }
         }
+        
+        response.getWriter().println(contact.getId());
+        response.getWriter().println(contact.getName());
+        response.getWriter().println(contact.getMobile());
+        response.getWriter().println(contact.getVpmn());
+        response.getWriter().println(contact.getEmail());
+        response.getWriter().println(contact.getHomeAddress());
+        response.getWriter().println(contact.getOfficeAddress());
+        response.getWriter().println(contact.getMemo());
+        response.getWriter().println(contact.getJobLevel());
+        response.getWriter().println(contact.getJob());
     }
 }
