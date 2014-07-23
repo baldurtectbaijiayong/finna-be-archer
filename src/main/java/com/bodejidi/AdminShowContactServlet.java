@@ -29,7 +29,7 @@ public class AdminShowContactServlet extends HttpServlet{
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("select * from contact where id=1");      
+            resultSet = statement.executeQuery("select * from contact where id=" + request.getParameter("contactId"));      
             resultSet.next();
             response.getWriter().println("name:" + resultSet.getString("Name"));  
             response.getWriter().println("mobile" + resultSet.getString("Mobile"));
