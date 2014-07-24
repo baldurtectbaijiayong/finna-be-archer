@@ -50,12 +50,12 @@ you may not use this file except in compliance with
 
     <servlet>
         <servlet-name>contact</servlet-name>
-        <servlet-class>com.bodejidi.ShowContactServlet</servlet-class>
+        <servlet-class>com.bodejidi.ContactShowServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>contact</servlet-name>
-        <url-pattern>/showContact</url-pattern>
+        <url-pattern>/contact/show</url-pattern>
     </servlet-mapping>
     
     <servlet>
@@ -64,7 +64,7 @@ you may not use this file except in compliance with
     </servlet>
     <servlet-mapping>
         <servlet-name>contactList</servlet-name>
-        <url-pattern>/contactList</url-pattern>
+        <url-pattern>/contact/list</url-pattern>
     </servlet-mapping>
 
   <servlet>
@@ -78,13 +78,13 @@ you may not use this file except in compliance with
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>AdminShowContact</servlet-name>
-    <servlet-class>com.bodejidi.AdminShowContactServlet</servlet-class>
+    <servlet-name>AdministratorContactShow</servlet-name>
+    <servlet-class>com.bodejidi.AdministratorContactShowServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>AdminShowContact</servlet-name>
-    <url-pattern>/admin/showcontact</url-pattern>
+    <servlet-name>AdministratorContactShow</servlet-name>
+    <url-pattern>/administrator/contact/show</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -5,10 +5,10 @@ Contact contact = (Contact)request.getAttribute("contact");
 %>
 <html>
     <head>
-        <title>ShowContact</title>
+        <title>ContactShow</title>
     </head>
     <body>
-        <h1>ShowContact</h1>
+        <h1>ContactShow</h1>
         <table border = "1">
             <tr>               
                 <td>name</td>

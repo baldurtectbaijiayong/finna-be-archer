@@ -15,12 +15,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class ShowContactServlet extends HttpServlet
+public class ContactShowServlet extends HttpServlet
 {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) 
         throws ServletException, IOException
     {
-        String paraId = req.getParameter("ContactId");
+        String paraId = req.getParameter("contactId");
         
         String SQLDriver = "com.mysql.jdbc.Driver";
         String SQLURL = "jdbc:mysql://localhost/test?" 
@@ -72,7 +72,7 @@ public class ShowContactServlet extends HttpServlet
                 req.setAttribute("contact",contact);
                 
                 getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/contact/showContact.jsp")
+                    .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
                     .forward(req, resp);
                 
             }catch(SQLException ex)

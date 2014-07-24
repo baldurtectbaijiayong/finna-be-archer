@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
-public class AdminShowContactServlet extends HttpServlet{
+public class AdministratorContactShowServlet extends HttpServlet{
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
         
