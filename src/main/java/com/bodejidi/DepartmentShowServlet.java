@@ -20,7 +20,11 @@ public class DepartmentShowServlet extends HttpServlet{
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		String sql = "select * from  department,contact,contact_department where department.name='" + request.getParameter("departmentName") + "'and contact_department.id_department=department.id and contact.id=contact_department.id_contact";
+		String sql = "select * from  department,contact,contact_department where "
+            + "department.name='" 
+            + request.getParameter("departmentName") 
+            + "'and contact_department.id_department=department.id and" 
+            + " contact.id=contact_department.id_contact";
 		List contacts = new ArrayList();
 
 		try	{
@@ -45,7 +49,12 @@ public class DepartmentShowServlet extends HttpServlet{
 			response.getWriter().println(sqle.getMessage());
 			sqle.printStackTrace();	
 		}
-		
+        
+        request.setAttribute("contactList",contacts);
+        getServletContext()
+            .getRequestDispatcher("/WEB-INF/jsp/department/show.jsp")
+            .forward(request, response);
+
 		if (resultSet != null){
 			try{
 				resultSet.close();		
@@ -66,13 +75,6 @@ public class DepartmentShowServlet extends HttpServlet{
 			}catch(SQLException sqle){
 				
 			}
-		}
-		for (Object obj : contacts){
-			Contact contact = (Contact) obj;
-			response.getWriter().println("Name:" + contact.getName());
-			response.getWriter().println("Mobile:" + contact.getMobile());
-			response.getWriter().println("Department:" + contact.getDepartment());
-
-		}
+		}    
 	}
 }
