@@ -22,8 +22,8 @@ public class DepartmentShowServlet extends HttpServlet{
 		ResultSet resultSet = null;
 
 		String sql = "select * from  department,contact,contact_department where "
-            + "department.name='" 
-            + request.getParameter("departmentName") 
+            + "department.id='" 
+            + request.getParameter("departmentId") 
             + "'and contact_department.id_department=department.id and" 
             + " contact.id=contact_department.id_contact";
 		List contacts = new ArrayList();
@@ -48,8 +48,8 @@ public class DepartmentShowServlet extends HttpServlet{
             department.setParent(resultSet.getString("parent"));
             department.setAddress(resultSet.getString("address"));
             department.setMemo(resultSet.getString("department.memo"));
-			contacts.add(contact);
-            
+            department.setId(resultSet.getLong("department.id"));
+			contacts.add(contact);            
 			}
 		}catch(SQLException sqle){
 			response.getWriter().println("Cannot connection to DB");
