@@ -43,7 +43,7 @@ public class ContactListServlet extends HttpServlet{
                 while (resultSet.next()){
                     //Map contact = new HashMap();
 					Contact contact = new Contact();
-					
+					contact.setId(resultSet.getLong("contact.id"));
                     contact.setName(resultSet.getString("contact.name"));
                     contact.setMobile(resultSet.getString("contact.mobile"));
                     contact.setDepartment(resultSet.getString("department.name"));
