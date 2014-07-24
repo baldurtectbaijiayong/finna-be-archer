@@ -11,9 +11,9 @@ public class Contact
     private String officeAddress;
     private String memo;
     private String job;
-    private String jobLevel;
+    private Long jobLevel;
     private String department;
-
+    private Long departmentId;
     public void setId(Long id)
     {
         this.id = id;
@@ -91,11 +91,11 @@ public class Contact
     {
         return this.job;
     }
-    public void setJobLevel(String jobLevel)
+    public void setJobLevel(Long jobLevel)
     {
         this.jobLevel = jobLevel;
     }
-    public String getJobLevel()
+    public Long getJobLevel()
     {
         return this.jobLevel;
     }
@@ -107,6 +107,14 @@ public class Contact
     public String getDepartment()
     {
         return this.department;
+    }
+    public void setDepartmentId(Long departmentId)
+    {
+        this.departmentId = departmentId;
+    }
+    public Long getDepartmentId()
+    {
+        return this.departmentId;
     }
 }
 
