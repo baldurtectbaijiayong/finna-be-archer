@@ -1,86 +1,77 @@
 package com.bodejidi;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import java.io.IOException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-
-public class DepartmentShowServlet extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
-		response.getWriter().println("Show");
+public class DepartmentShowServlet extends HttpServlet{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) 
+		throws ServletException, IOException{
 
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List<Department> departments = new ArrayList();
+		String sql = "select * from  department,contact,contact_department where department.name='" + request.getParameter("departmentName") + "'and contact_department.id_department=department.id and contact.id=contact_department.id_contact";
+		List contacts = new ArrayList();
 
-		try{
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		} catch(Exception e) {
-			// handle the error
+		try	{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+		}catch(Exception e){
+
 		}
-
 		try{
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("select * from department");
-
+			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
-				Department department = new Department();
-
-				department.setName(resultSet.getString("name"));
-				department.setMemo(resultSet.getString("memo"));
-				department.setParent(resultSet.getString("parent"));
-				department.setAddress(resultSet.getString("address"));	
-				
-				departments.add(department);
+			Contact contact = new Contact();
+			contact.setName(resultSet.getString("contact.name"));
+			contact.setMobile(resultSet.getString("mobile"));
+			contact.setDepartment(resultSet.getString("department.name"));
 			}
-			
-		} catch(SQLException sqle) {
-			response.getWriter().println("cannot connect to db");
-			sqle.printStackTrace();
+		}catch(SQLException sqle){
+			response.getWriter().println("Cannot connection to DB");
+			response.getWriter().println(sqle.getMessage());
+			sqle.printStackTrace();	
 		}
-
-		if(resultSet != null) {
-			try{
-				resultSet.close();
-			}catch(Exception ex) {
-				
-			}
-		}
-
-		if(statement != null) {
-			try{
-				statement.close();
-			}catch(Exception ex){
 		
-			}
-		}
-
-		if(connection != null) {
+		if (resultSet != null){
 			try{
-				connection.close();
-			}catch(Exception ex){
-
+				resultSet.close();		
+			}catch(SQLException sqle){
+				
 			}
 		}
+		if (statement != null){
+			try{
+				statement.close();		
+			}catch(SQLException sqle){
+				
+			}
+		}
+		if (connection != null){
+			try{
+				connection.close();		
+			}catch(SQLException sqle){
+				
+			}
+		}
+		for (Object obj : contacts){
+			Contact contact = (Contact) obj;
+			response.getWriter().println("Name:" + contact.getName());
+			response.getWriter().println("Mobile:" + contact.getMobile());
+			response.getWriter().println("Department:" + contact.getDepartment());
 
-		request.setAttribute("departmentList", departments);
-		getServletContext()
-			.getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
-			.forward(request, response);
+		}
 	}
 }

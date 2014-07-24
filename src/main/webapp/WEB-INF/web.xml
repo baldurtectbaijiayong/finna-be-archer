@@ -62,20 +62,41 @@ you may not use this file except in compliance with
         <servlet-name>contactList</servlet-name>
         <servlet-class>com.bodejidi.ContactListServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>contactList</servlet-name>
         <url-pattern>/contact/list</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>departmentShow</servlet-name>
-	<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>departmentShow</servlet-name>
+        <servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-	<servlet-name>departmentShow</servlet-name>
-	<url-pattern>/department/show</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>departmentShow</servlet-name>
+        <url-pattern>/department/show</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>administrator</servlet-name>
+	    <servlet-class>com.bodejidi.AdministratorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+	    <servlet-name>administrator</servlet-name>
+        <url-pattern>/administrator/login</url-pattern>
+    </servlet-mapping>
+    
+	<servlet>
+		<servlet-name>departmentShow</servlet-name>
+		<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>departmentShow</servlet-name>
+		<url-pattern>/department/show</url-pattern>
+	</servlet-mapping>
   
   <servlet>
     <servlet-name>AdministratorContactShow</servlet-name>
