@@ -14,7 +14,7 @@ List contactList = (List) request.getAttribute("contactList");
         <table border = "1">
             <h1>All Contacts</h1>
             <tr>
-                <td>name</td>
+                <td> name</td>
                 <td>mobile</td>
                 <td>department</td>
             
@@ -22,7 +22,7 @@ List contactList = (List) request.getAttribute("contactList");
 
             <c:forEach var = "contact" items = "${contactList}">
             <tr>
-                <td>${contact.name}</td>
+                <td><a href = "show?contactId=${contact.id}">${contact.name}</a></td>
                 <td>${contact.mobile}</td>
                 <td>${contact.department}</td>
             </tr>
