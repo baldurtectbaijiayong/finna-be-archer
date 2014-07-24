@@ -89,12 +89,12 @@ you may not use this file except in compliance with
     </servlet-mapping>
   
 	 <servlet>
-		 <servlet-name>AdministratorContactShow</servlet-name>
-		 <servlet-class>com.bodejidi.AdministratorContactShowServlet</servlet-class>
+		 <servlet-name>AdministratorContact</servlet-name>
+		 <servlet-class>com.bodejidi.AdministratorContactServlet</servlet-class>
 	 </servlet>
   
 	 <servlet-mapping>
-		 <servlet-name>AdministratorContactShow</servlet-name>
+		 <servlet-name>AdministratorContact</servlet-name>
 		 <url-pattern>/administrator/contact/show</url-pattern>
 	 </servlet-mapping>
 
