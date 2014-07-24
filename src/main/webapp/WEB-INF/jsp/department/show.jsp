@@ -11,19 +11,19 @@ Department department = (Department) request.getAttribute("department");
         </title>
     </head>
     <body>
-        <h1 fontsize = "15" align = "center">Department Name: ${department.name}</h1>
+    <h1 align = "center"> <font size = "15">Department Name: ${department.name}</font></h1>
         <table  align = "center">
             <tr>
-                <td>parent</td>
-                <td>${department.parent}</td>
+                <td><font size = "10">parent</font></td>
+                <td><font size = "10">${department.parent}</font></td>
             </tr>
             <tr>
-                <td>address</td>
-                <td>${department.address}</td>
+                <td><font size = "10">address</font></td>
+                <td><font size = "10">${department.address}</font></td>
             </tr>
             <tr>
-                <td>memo</td>
-                <td>${department.memo}</td>
+                <td><font size = "10">memo</font></td>
+                <td><font size = "10">${department.memo}</font></td>
             </tr>          
                        
         </table>
@@ -32,17 +32,17 @@ Department department = (Department) request.getAttribute("department");
         </br>
         <table border = "1" align = "center">
             <tr>
-                <td>name</td>
-                <td>mobile</td>
-                <td>department</td>
+                <td><font size = "8">name</font></td>
+                <td><font size = "8">mobile</font></td>
+                <td><font size = "8">department</font></td>
             
             </tr>
 
             <c:forEach var = "contact" items = "${contactList}">
             <tr>
-                <td>${contact.name}</td>
-                <td>${contact.mobile}</td>
-                <td>${contact.department}</td>
+                <td><font size = "8">${contact.name}</font></td>
+                <td><font size = "8">${contact.mobile}</font></td>
+                <td><font size = "8">${contact.department}</font></td>
             </tr>
             </c:forEach>
         </table>
