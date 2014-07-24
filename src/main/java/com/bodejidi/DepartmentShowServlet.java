@@ -38,6 +38,7 @@ public class DepartmentShowServlet extends HttpServlet{
 			contact.setName(resultSet.getString("contact.name"));
 			contact.setMobile(resultSet.getString("mobile"));
 			contact.setDepartment(resultSet.getString("department.name"));
+			contacts.add(contact);
 			}
 		}catch(SQLException sqle){
 			response.getWriter().println("Cannot connection to DB");

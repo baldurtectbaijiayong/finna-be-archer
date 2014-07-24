@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 
 <!--
  Licensed to the Apache Software Foundation (ASF) under one or more
@@ -87,25 +87,15 @@ you may not use this file except in compliance with
 	    <servlet-name>administrator</servlet-name>
         <url-pattern>/administrator/login</url-pattern>
     </servlet-mapping>
-    
-	<servlet>
-		<servlet-name>departmentShow</servlet-name>
-		<servlet-class>com.bodejidi.DepartmentShowServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>departmentShow</servlet-name>
-		<url-pattern>/department/show</url-pattern>
-	</servlet-mapping>
   
-  <servlet>
-    <servlet-name>AdministratorContactShow</servlet-name>
-    <servlet-class>com.bodejidi.AdministratorContactShowServlet</servlet-class>
-  </servlet>
+	 <servlet>
+		 <servlet-name>AdministratorContactShow</servlet-name>
+		 <servlet-class>com.bodejidi.AdministratorContactShowServlet</servlet-class>
+	 </servlet>
   
-  <servlet-mapping>
-    <servlet-name>AdministratorContactShow</servlet-name>
-    <url-pattern>/administrator/contact/show</url-pattern>
-  </servlet-mapping>
+	 <servlet-mapping>
+		 <servlet-name>AdministratorContactShow</servlet-name>
+		 <url-pattern>/administrator/contact/show</url-pattern>
+	 </servlet-mapping>
 
 </web-app>
