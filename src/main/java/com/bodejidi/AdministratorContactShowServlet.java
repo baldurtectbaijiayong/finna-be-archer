@@ -42,7 +42,7 @@ public class AdministratorContactShowServlet extends HttpServlet{
             contact.setOfficeAddress(resultSet.getString("office_address"));
             contact.setMemo(resultSet.getString("memo"));
             contact.setJob(resultSet.getString("job"));
-            contact.setJobLevel(resultSet.getString("job_level"));
+            contact.setJobLevel(resultSet.getLong("job_level"));
         }catch(SQLException sqle){
             response.getWriter().println("can not connect to DB");
             response.getWriter().println(sqle.getMessage());
