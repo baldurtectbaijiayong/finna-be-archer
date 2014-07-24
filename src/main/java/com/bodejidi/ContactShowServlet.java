@@ -66,7 +66,7 @@ public class ContactShowServlet extends HttpServlet
                 contact.setOfficeAddress(resultSet.getString("office_address"));
                 contact.setMemo(resultSet.getString("memo"));
                 contact.setJob(resultSet.getString("job"));
-                contact.setJobLevel(resultSet.getString("job_level"));
+                contact.setJobLevel(resultSet.getLong("job_level"));
 
                 System.out.println(resultSet);
                 req.setAttribute("contact",contact);
