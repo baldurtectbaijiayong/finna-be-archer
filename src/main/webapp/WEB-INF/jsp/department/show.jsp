@@ -1,7 +1,8 @@
-<%@ page import = "java.util.List,com.bodejidi.Contact"%>
+<%@ page import = "java.util.List,com.bodejidi.Contact,com.bodejidi.Department"%>
 <%@ taglib prefix ="c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <%
 List contactList = (List) request.getAttribute("contactList");
+Department department = (Department) request.getAttribute("department");
 %>
 <html>
     <head>
@@ -10,7 +11,26 @@ List contactList = (List) request.getAttribute("contactList");
         </title>
     </head>
     <body>
-        <table border = "1">
+        <h1 fontsize = "15" align = "center">Department Name: ${department.name}</h1>
+        <table  align = "center">
+            <tr>
+                <td>parent</td>
+                <td>${department.parent}</td>
+            </tr>
+            <tr>
+                <td>address</td>
+                <td>${department.address}</td>
+            </tr>
+            <tr>
+                <td>memo</td>
+                <td>${department.memo}</td>
+            </tr>          
+                       
+        </table>
+        </br>
+        </br>
+        </br>
+        <table border = "1" align = "center">
             <tr>
                 <td>name</td>
                 <td>mobile</td>
