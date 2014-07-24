@@ -8,6 +8,7 @@ Contact contact = (Contact)request.getAttribute("contact");
         <title>ContactShow</title>
     </head>
     <body>
+        <h4><a href = "list">Back</a></h4>
         <h1>ContactShow</h1>
         <table border = "1">
             <tr>               
