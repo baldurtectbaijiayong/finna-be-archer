@@ -160,4 +160,62 @@ public class AdministratorContactServlet extends HttpServlet{
             }
         }
     }
+    
+    public void doPost(HttpServletRequest request,HttpServletResponse response)
+        throws IOException,ServletException{
+            
+        String sql;
+        int result;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        }catch(Exception ex){
+            //handl the error
+        }
+        if(request.getParameter("contactId") != null && request.getParameter("contactId") != ""){
+            try{
+                sql = "delete from contact where id=" 
+                    + request.getParameter("contactId");
+                
+                Contact contact = new Contact();
+                
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                statement = connection.createStatement();
+                result = statement.executeUpdate(sql); 
+                response.getWriter().println("The Contact has been delete");
+           
+            }catch(SQLException sqle){
+                response.getWriter().println("can not connect to DB");
+                response.getWriter().println(sqle.getMessage());
+                sqle.printStackTrace();
+            }
+            
+            if(resultSet != null){
+                try{
+                    resultSet.close();
+                }catch(Exception ex){
+                
+                }
+            }
+            
+            if(statement != null){
+                try{
+                    statement.close();
+                }catch(Exception ex){
+                
+                }
+            }
+            
+            if(connection != null){
+                try{
+                    connection.close();
+                }catch(Exception e){
+                
+                }
+            }
+        }
+    }
 }
