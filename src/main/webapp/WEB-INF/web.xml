@@ -88,14 +88,14 @@ you may not use this file except in compliance with
         <url-pattern>/administrator/login</url-pattern>
     </servlet-mapping>
   
-	 <servlet>
-		 <servlet-name>AdministratorContact</servlet-name>
-		 <servlet-class>com.bodejidi.AdministratorContactServlet</servlet-class>
-	 </servlet>
+	<servlet>
+        <servlet-name>AdministratorContact</servlet-name>
+        <servlet-class>com.bodejidi.AdministratorContactServlet</servlet-class>
+    </servlet>
   
-	 <servlet-mapping>
-		 <servlet-name>AdministratorContact</servlet-name>
-		 <url-pattern>/administrator/contact/show</url-pattern>
-	 </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdministratorContact</servlet-name>
+        <url-pattern>/administrator/contact/show</url-pattern>
+    </servlet-mapping>
 
 </web-app>
