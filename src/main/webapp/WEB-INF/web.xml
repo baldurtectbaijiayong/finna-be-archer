@@ -77,6 +77,16 @@ you may not use this file except in compliance with
         <servlet-name>departmentShow</servlet-name>
         <url-pattern>/department/show</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>departmentList</servlet-name>
+        <servlet-class>com.bodejidi.DepartmentListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>departmentList</servlet-name>
+        <url-pattern>/department/list</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>administrator</servlet-name>
