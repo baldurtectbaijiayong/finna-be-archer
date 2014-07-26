@@ -40,7 +40,8 @@ public class DepartmentListServlet extends HttpServlet {
 
             while(resultSet.next()){
                 Department department = new Department();
-
+                
+                department.setId(resultSet.getLong("id"));
                 department.setName(resultSet.getString("name"));
                 department.setMemo(resultSet.getString("memo"));
                 department.setParent(resultSet.getString("parent"));

@@ -21,9 +21,7 @@ List<Department> departmentList = (List<Department>) request.getAttribute("depar
 		</tr>
 		<c:forEach var="department" items="${departmentList}">
 		<tr>
-			<a href="show">
-			<td>${department.name}</td>
-			</a>
+			<td><a href="show?departmentId=${department.id}">${department.name}</a></td>
 			<td>${department.memo}</td>
 			<td>${department.parent}</td>
 			<td>${department.address}</td>
