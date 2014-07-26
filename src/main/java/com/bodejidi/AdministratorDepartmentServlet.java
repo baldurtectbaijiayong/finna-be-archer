@@ -18,65 +18,127 @@ import java.util.ArrayList;
 public class AdministratorDepartmentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
-        response.getWriter().println("Department");
         
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        List<Department> departments = new ArrayList();
-        
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch(Exception e) {
-        
-        }
-        
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("select * from department");
-            while(resultSet.next()) {
-                Department department = new Department();
+        if(request.getParameter("departmentId") == null){
+            response.getWriter().println("Department List");
+            
+            Connection connection = null;
+            Statement statement = null;
+            ResultSet resultSet = null;
+            List<Department> departments = new ArrayList();
+            
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch(Exception e) {
+            
+            }
+            
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery("select * from department");
+                while(resultSet.next()) {
+                    Department department = new Department();
+                    
+                    department.setId(resultSet.getLong("id"));
+                    department.setName(resultSet.getString("name"));
+                    department.setParent(resultSet.getString("parent"));
+                    department.setAddress(resultSet.getString("address"));
                 
-                department.setId(resultSet.getLong("id"));
-                department.setName(resultSet.getString("name"));
-                department.setParent(resultSet.getString("parent"));
-                department.setAddress(resultSet.getString("address"));
-            
-                departments.add(department);
+                    departments.add(department);
+                }
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
             }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-        
-        if(resultSet != null) {
-            try {
-                resultSet.close();
-            } catch(Exception e) {
             
-            }
-        }
-        
-        if(statement != null) {
-            try {
-                statement.close();
-            } catch(Exception e) {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch(Exception e) {
                 
+                }
             }
-        }
-        
-        if(connection != null) {
+            
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(Exception e) {
+                    
+                }
+            }
+            
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(Exception e) {
+                
+                }
+            }
+            
+            for(Department department: departments){
+                response.getWriter().println(department.getName());
+                response.getWriter().println(department.getParent());
+                response.getWriter().println(department.getAddress());
+            }
+        } else {
+            response.getWriter().println("Department Show");
+            
+            Connection connection = null;
+            Statement statement = null;
+            ResultSet resultSet = null;
+            Department department = new Department();
+            
             try {
-                connection.close();
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
             } catch(Exception e) {
             
             }
-        }
-        
-        for(Department department: departments){
-            response.getWriter().println(department.getName());
-            response.getWriter().println(department.getParent());
-            response.getWriter().println(department.getAddress());
+            
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery("select * from department where id=2");
+                if(resultSet.next()) {
+                    department.setId(resultSet.getLong("id"));
+                    department.setName(resultSet.getString("name"));
+                    department.setParent(resultSet.getString("parent"));
+                    department.setAddress(resultSet.getString("address"));
+                }
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch(Exception e) {
+                
+                }
+            }
+            
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(Exception e) {
+                    
+                }
+            }
+            
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(Exception e) {
+                
+                }
+            }
+            
+            if(department.getId() != null){
+                response.getWriter().println(department.getName());
+                response.getWriter().println(department.getParent());
+                response.getWriter().println(department.getAddress());
+            } else {
+                response.getWriter().println("cannot find this department");
+            }
         }
     }
 }
