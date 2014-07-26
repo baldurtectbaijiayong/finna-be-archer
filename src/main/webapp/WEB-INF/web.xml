@@ -28,7 +28,7 @@ you may not use this file except in compliance with
 
 
 
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app xmlns="http://java.soun.com/xml/ns/javaee"
  
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  
