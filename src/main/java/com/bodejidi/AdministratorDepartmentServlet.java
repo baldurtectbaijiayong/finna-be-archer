@@ -19,5 +19,20 @@ public class AdministratorDepartmentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
         response.getWriter().println("Department");
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch(Exception e) {
+        
+        }
+        
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+            response.getWriter().println(connection);
+            connection.close();
+        } catch (SQLException sqle) {
+            response.getWriter().println("cannot connect to db");
+            sqle.printStackTrace();
+        }
     }
 }
