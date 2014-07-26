@@ -107,15 +107,5 @@ you may not use this file except in compliance with
         <servlet-name>AdministratorContact</servlet-name>
         <url-pattern>/administrator/contact/show</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdministratorDeleteContact</servlet-name>
-        <servlet-class>com.bodejidi.ContactDeleteServlet</servlet-class>
-    </servlet>
-  
-    <servlet-mapping>
-        <servlet-name>AdministratorDeleteContact</servlet-name>
-        <url-pattern>/administrator/contact/delete</url-pattern>
-    </servlet-mapping>
 
 </web-app>
