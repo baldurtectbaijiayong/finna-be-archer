@@ -107,5 +107,15 @@ you may not use this file except in compliance with
         <servlet-name>AdministratorContact</servlet-name>
         <url-pattern>/administrator/contact/list</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdministratorDepartment</servlet-name>
+        <servlet-class>com.bodejidi.AdministratorDepartmentServlet</servlet-class>
+    </servlet>
+  
+    <servlet-mapping>
+        <servlet-name>AdministratorDepartment</servlet-name>
+        <url-pattern>/administrator/department/list</url-pattern>
+    </servlet-mapping>
 
 </web-app>
