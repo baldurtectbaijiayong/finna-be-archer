@@ -105,7 +105,7 @@ you may not use this file except in compliance with
   
     <servlet-mapping>
         <servlet-name>AdministratorContact</servlet-name>
-        <url-pattern>/administrator/contact/show</url-pattern>
+        <url-pattern>/administrator/contact/list</url-pattern>
     </servlet-mapping>
 
 </web-app>
