@@ -20,6 +20,10 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         throws IOException,ServletException{
         response.getWriter().println("Department");
         
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch(Exception e) {
@@ -27,20 +31,40 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         }
         
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from department");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from department");
             while(resultSet.next()) {
                 response.getWriter().println(resultSet.getString("name"));
                 response.getWriter().println(resultSet.getString("parent"));
                 response.getWriter().println(resultSet.getString("address"));
             }
-            resultSet.close();
-            statement.close();
-            connection.close();
         } catch (SQLException sqle) {
-            response.getWriter().println("cannot connect to db");
             sqle.printStackTrace();
+        }
+        
+        if(resultSet != null) {
+            try {
+                resultSet.close();
+            } catch(Exception e) {
+            
+            }
+        }
+        
+        if(statement != null) {
+            try {
+                statement.close();
+            } catch(Exception e) {
+                
+            }
+        }
+        
+        if(connection != null) {
+            try {
+                connection.close();
+            } catch(Exception e) {
+            
+            }
         }
     }
 }
