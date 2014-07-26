@@ -1,8 +1,8 @@
-<%@ page import = "java.util.List,com.bodejidi.Contact,com.bodejidi.Department"%>
-<%@ taglib prefix ="c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.List,com.bodejidi.Contact,com.bodejidi.Department"%>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-List contactList = (List) request.getAttribute("contactList");
-Department department = (Department) request.getAttribute("department");
+List contactList=(List) request.getAttribute("contactList");
+Department department=(Department) request.getAttribute("department");
 %>
 <html>
     <head>
@@ -12,38 +12,37 @@ Department department = (Department) request.getAttribute("department");
     </head>
     <body>
     <a href="../contact/list">Contact List</a>&nbsp;|&nbsp;<a href="list">Department List</a>
-    <h1 align = "center"> <font size = "15">Department Name: ${department.name}</font></h1>
-        <table  align = "center">
+    <h1 align="center">Department Name: ${department.name}</h1>
+        <table align="center" border="1">
             <tr>
-                <td><font size = "10">parent</font></td>
-                <td><font size = "10">${department.parent}</font></td>
+                <td>parent</td>
+                <td>${department.parent}</td>
             </tr>
             <tr>
-                <td><font size = "10">address</font></td>
-                <td><font size = "10">${department.address}</font></td>
+                <td>address</td>
+                <td>${department.address}</td>
             </tr>
             <tr>
-                <td><font size = "10">memo</font></td>
-                <td><font size = "10">${department.memo}</font></td>
+                <td>memo</td>
+                <td>${department.memo}</td>
             </tr>          
                        
         </table>
         </br>
         </br>
-        </br>
-        <table border = "1" align = "center">
+        <table border="1" align="center">
             <tr>
-                <td><font size = "8">name</font></td>
-                <td><font size = "8">mobile</font></td>
-                <td><font size = "8">department</font></td>
+                <td>name</td>
+                <td>mobile</td>
+                <td>department</td>
             
             </tr>
 
-            <c:forEach var = "contact" items = "${contactList}">
+            <c:forEach var="contact" items="${contactList}">
             <tr>
-                <td><font size = "8"><a href="../contact/show?contactId=${contact.id}">${contact.name}</font></td>
-                <td><font size = "8">${contact.mobile}</font></td>
-                <td><font size = "8">${contact.department}</font></td>
+                <td><a href="../contact/show?contactId=${contact.id}">${contact.name}</td>
+                <td>${contact.mobile}</td>
+                <td>${contact.department}</td>
             </tr>
             </c:forEach>
         </table>
