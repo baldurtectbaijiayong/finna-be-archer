@@ -18,7 +18,7 @@
                 <td>name</td>
                 <td>mobile</td>
                 <td>department</td>
-            
+                <td>operation</td>          
             </tr>
 
             <c:forEach var = "contact" items= "${contactList}">
@@ -26,6 +26,7 @@
                 <td><a href = "list?contactId=${contact.id}">${contact.name}</td>
                 <td>${contact.mobile}</td>
                 <td><a href = "../department/show?departmentId=${contact.departmentId}">${contact.department}</td>
+                <td><a href = "?contactId=${contact.id}">Alter&nbsp;|&nbsp;<a href = "?contactId=${contact.id}">Delete</td>
             </tr>
             </c:forEach>
         </table>
