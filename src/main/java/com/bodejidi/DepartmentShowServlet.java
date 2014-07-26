@@ -44,6 +44,7 @@ public class DepartmentShowServlet extends HttpServlet{
             while(resultSet.next()){
                 Contact contact = new Contact();  
                 
+                contact.setId(resultSet.getLong("contact.id"));
                 contact.setName(resultSet.getString("contact.name"));
                 contact.setMobile(resultSet.getString("mobile"));
                 contact.setDepartment(resultSet.getString("department.name"));
@@ -83,6 +84,7 @@ public class DepartmentShowServlet extends HttpServlet{
         }
         if (connection != null){
             try{
+            
                 connection.close();		
             }catch(SQLException sqle){
                 

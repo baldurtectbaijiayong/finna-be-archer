@@ -41,7 +41,7 @@ Department department = (Department) request.getAttribute("department");
 
             <c:forEach var = "contact" items = "${contactList}">
             <tr>
-                <td><font size = "8">${contact.name}</font></td>
+                <td><font size = "8"><a href="../contact/show?contactId=${contact.id}">${contact.name}</font></td>
                 <td><font size = "8">${contact.mobile}</font></td>
                 <td><font size = "8">${contact.department}</font></td>
             </tr>
