@@ -1,8 +1,7 @@
 <%@ page import="java.util.List,com.bodejidi.Contact,com.bodejidi.Department"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <% 
-List contactList = (List) request.getAttribute("contactList");
-List departmentList = (List) request.getAttribute("departmentList");
+    List contactList = (List) request.getAttribute("contactList");
 %>
 
 <html>
@@ -13,13 +12,12 @@ List departmentList = (List) request.getAttribute("departmentList");
     </head>
     <body>
         <a href="../department/list">Department List</a>
+        <h1>All Contacts</h1>
         <table border = "1">
-            <h1>All Contacts</h1>
             <tr>
                 <td>name</td>
                 <td>mobile</td>
-                <td>department</td>
-            
+                <td>department</td>           
             </tr>
 
             <c:forEach var = "contact" items= "${contactList}">
@@ -29,6 +27,7 @@ List departmentList = (List) request.getAttribute("departmentList");
                 <td><a href = "../department/show?departmentId=${contact.departmentId}">${contact.department}</td>
             </tr>
             </c:forEach>
+            
         </table>
     </body>
 
