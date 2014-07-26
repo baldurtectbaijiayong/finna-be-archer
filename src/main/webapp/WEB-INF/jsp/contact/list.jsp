@@ -12,6 +12,7 @@ List departmentList = (List) request.getAttribute("departmentList");
         </title>
     </head>
     <body>
+        <a href="../department/list">Department List</a>
         <table border = "1">
             <h1>All Contacts</h1>
             <tr>
