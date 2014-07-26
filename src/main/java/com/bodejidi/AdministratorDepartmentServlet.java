@@ -23,6 +23,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        List<Department> departments = new ArrayList();
         
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -42,9 +43,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 department.setParent(resultSet.getString("parent"));
                 department.setAddress(resultSet.getString("address"));
             
-                response.getWriter().println(department.getName());
-                response.getWriter().println(department.getParent());
-                response.getWriter().println(department.getAddress());
+                departments.add(department);
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -72,6 +71,12 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             } catch(Exception e) {
             
             }
+        }
+        
+        for(Department department: departments){
+            response.getWriter().println(department.getName());
+            response.getWriter().println(department.getParent());
+            response.getWriter().println(department.getAddress());
         }
     }
 }
