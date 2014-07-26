@@ -11,6 +11,7 @@ Department department = (Department) request.getAttribute("department");
         </title>
     </head>
     <body>
+    <a href="../contact/list">Back</a>
     <h1 align = "center"> <font size = "15">Department Name: ${department.name}</font></h1>
         <table  align = "center">
             <tr>
