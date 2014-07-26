@@ -39,7 +39,12 @@ public class ContactShowServlet extends HttpServlet
         else
         {
             Long id = Long.valueOf(paraId);
-            String sql = "SELECT * FROM contact WHERE id=" + id;
+            String sql = "select * from  department,contact,contact_department where "
+                + "contact.id='" 
+                + req.getParameter("contactId") 
+                + "'and contact_department.id_department=department.id and" 
+                + " contact.id=contact_department.id_contact";
+                
 
             resp.getWriter().println(id);
             try
@@ -57,18 +62,21 @@ public class ContactShowServlet extends HttpServlet
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
                
-                contact.setId(resultSet.getLong("id"));
-                contact.setName(resultSet.getString("name")); 
+                contact.setId(resultSet.getLong("contact.id"));
+                contact.setName(resultSet.getString("contact.name")); 
                 contact.setMobile(resultSet.getString("mobile"));
                 contact.setVpmn(resultSet.getString("vpmn"));
                 contact.setEmail(resultSet.getString("email"));
                 contact.setHomeAddress(resultSet.getString("home_address"));
                 contact.setOfficeAddress(resultSet.getString("office_address"));
-                contact.setMemo(resultSet.getString("memo"));
+                contact.setMemo(resultSet.getString("contact.memo"));
                 contact.setJob(resultSet.getString("job"));
                 contact.setJobLevel(resultSet.getLong("job_level"));
-
+                
+                contact.setDepartmentId(resultSet.getLong("department.id"));
+                contact.setDepartment(resultSet.getString("department.name"));
                 System.out.println(resultSet);
+                
                 req.setAttribute("contact",contact);
                 
                 getServletContext()
