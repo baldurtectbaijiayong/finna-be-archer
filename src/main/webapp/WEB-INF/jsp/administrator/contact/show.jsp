@@ -9,47 +9,50 @@ Contact contact = (Contact)request.getAttribute("contact");
     </head>
     <body>
         <h4><a href = "list">Back</a></h4>
-        <h1>ContactShow</h1>
+        <h1>Contact Show</h1>
+        <form action = "" method = "POST" >
         <table border = "1">
             <tr>               
                 <td>name</td>
-                <td>${contact.name}</td>
+                <td><input type = "text" name = "contactName" value = "${contact.name}"/></td>
             </tr>
                 <td>mobile</td>
-                <td>${contact.mobile}</td>
+                <td><input type = "text" name = "contactMobile" value = "${contact.mobile}"/></td>
             </tr>    
             <tr>
                 <td>vpmn</td>
-                <td>${contact.vpmn}</td>
+                <td><input type = "text" name = "contactVpmn" value = "${contact.vpmn}"/></td>
             </tr>
             <tr>
                 <td>email</td>
-                <td>${contact.email}</td>
+                <td><input type = "text" name = "contactEmail" value = "${contact.email}"/></td>
             </tr>
             <tr>
                 <td>homeAddress</td>
-                <td>${contact.homeAddress}</td>
+                <td><input type = "text" name = "contactHomeAddress" value = "${contact.homeAddress}"/></td>
             </tr>
             <tr>
                 <td>officeAddress</td>
-                <td>${contact.officeAddress}</td>
+                <td><input type = "text" name = "contactOfficeAddress" value = "${contact.officeAddress}"/></td>
             </tr>
             <tr>
                 <td>memo</td>
-                <td>${contact.memo}</td>
+                <td><input type = "text" name = "contactMemo" value = "${contact.memo}"/></td>
             </tr>
             <tr>
                 <td>job</td>
-                <td>${contact.job}</td>
+                <td><input type = "text" name = "contactJob" value = "${contact.job}"/></td>
             </tr>
             <tr>
                 <td>jobLevel</td>
-                <td>${contact.jobLevel}</td>
+                <td><input type = "text" name = "contactJobLevel" value = "${contact.jobLevel}"/></td>
             </tr>
             <tr>
                 <td>department</td>
-                <td>${contact.department}</td>
+                <td><input type = "text" name = "contactDepartment" value = "${contact.department}"/></td>
             </tr>
-        </table>    
+        </table>
+        <input type = "submit" name = "action" value = "Update"/>
+        <input type = "submit" name = "action" value = "Delete"/>
     </body>
 </html>
