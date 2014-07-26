@@ -23,12 +23,11 @@ public class ContactListServlet extends HttpServlet{
         throws IOException, ServletException{
             
             String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
-            
             List contacts = new ArrayList();            
-
             Connection connection = null;
             Statement statement = null;
             ResultSet resultSet = null;
+
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
             }catch(Exception e){
@@ -43,11 +42,17 @@ public class ContactListServlet extends HttpServlet{
                 while (resultSet.next()){
                     //Map contact = new HashMap();
 					Contact contact = new Contact();
-					
+					contact.setId(resultSet.getLong("contact.id"));
                     contact.setName(resultSet.getString("contact.name"));
                     contact.setMobile(resultSet.getString("contact.mobile"));
                     contact.setDepartment(resultSet.getString("department.name"));
-
+                    contact.setOfficeAddress(resultSet.getString("office_address"));
+                    contact.setHomeAddress(resultSet.getString("home_address"));
+                    contact.setVpmn(resultSet.getString("vpmn"));
+                    contact.setMemo(resultSet.getString("contact.memo"));
+                    contact.setJob(resultSet.getString("job")); 
+                    contact.setJobLevel(resultSet.getLong("job_level"));
+                    contact.setDepartmentId(resultSet.getLong("department.id"));
                     contacts.add(contact);
                 }
                 

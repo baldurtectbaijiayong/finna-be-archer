@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
-public class AdministratorContactShowServlet extends HttpServlet{
+public class AdministratorContactServlet extends HttpServlet{
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
         
@@ -43,6 +43,14 @@ public class AdministratorContactShowServlet extends HttpServlet{
             contact.setMemo(resultSet.getString("memo"));
             contact.setJob(resultSet.getString("job"));
             contact.setJobLevel(resultSet.getLong("job_level"));
+            
+            System.out.println(resultSet);
+            request.setAttribute("contact",contact);
+                
+            getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/show.jsp")
+                .forward(request, response);
+                
         }catch(SQLException sqle){
             response.getWriter().println("can not connect to DB");
             response.getWriter().println(sqle.getMessage());
@@ -72,16 +80,5 @@ public class AdministratorContactShowServlet extends HttpServlet{
             
             }
         }
-        
-        response.getWriter().println(contact.getId());
-        response.getWriter().println(contact.getName());
-        response.getWriter().println(contact.getMobile());
-        response.getWriter().println(contact.getVpmn());
-        response.getWriter().println(contact.getEmail());
-        response.getWriter().println(contact.getHomeAddress());
-        response.getWriter().println(contact.getOfficeAddress());
-        response.getWriter().println(contact.getMemo());
-        response.getWriter().println(contact.getJobLevel());
-        response.getWriter().println(contact.getJob());
     }
 }
