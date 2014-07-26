@@ -40,9 +40,9 @@ public class ContactListServlet extends HttpServlet{
                 resultSet = statement.executeQuery(sql);
                 
                 while (resultSet.next()){
-                    //Map contact = new HashMap();
 					Contact contact = new Contact();
-					contact.setId(resultSet.getLong("contact.id"));
+
+                    contact.setId(resultSet.getLong("contact.id"));
                     contact.setName(resultSet.getString("contact.name"));
                     contact.setMobile(resultSet.getString("contact.mobile"));
                     contact.setDepartment(resultSet.getString("department.name"));
@@ -55,8 +55,6 @@ public class ContactListServlet extends HttpServlet{
                     contact.setDepartmentId(resultSet.getLong("department.id"));
                     contacts.add(contact);
                 }
-                
-
             }catch(SQLException sqle){
                 response.getWriter().println("Can not connect DB");
             }
@@ -65,7 +63,7 @@ public class ContactListServlet extends HttpServlet{
                 try{
                     resultSet.close();
                 }catch(Exception e){
-                    
+                    //ignore; 
                 }
             }
                
@@ -73,14 +71,14 @@ public class ContactListServlet extends HttpServlet{
                 try{
                     statement.close();
                 }catch(Exception e){
-                        
+                    //ignore;                       
                 }
             }
             if(connection!=null){
                 try{
                     connection.close();
                 }catch(Exception e){
-
+                    //ignore;  
                 }
             }
             request.setAttribute("contactList",contacts);
