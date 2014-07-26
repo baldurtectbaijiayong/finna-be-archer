@@ -11,8 +11,9 @@
         </title>
     </head>
     <body>
+        <a href="../department/list">Department List</a>
+        <h1>All Contacts</h1>
         <table border = "1">
-            <h1>All Contacts</h1>
             <tr>
                 <td>name</td>
                 <td>mobile</td>
@@ -22,9 +23,9 @@
 
             <c:forEach var = "contact" items= "${contactList}">
             <tr>
-                <td>${contact.name}</td>
+                <td><a href = "list?contactId=${contact.id}">${contact.name}</td>
                 <td>${contact.mobile}</td>
-                <td>${contact.department}</td>
+                <td><a href = "../department/show?departmentId=${contact.departmentId}">${contact.department}</td>
             </tr>
             </c:forEach>
         </table>
