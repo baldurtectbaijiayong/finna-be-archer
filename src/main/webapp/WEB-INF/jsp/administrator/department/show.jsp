@@ -11,24 +11,28 @@ Department department = (Department) request.getAttribute("department");
     <body>
         <a href="list">Department List</a>
         <h1>Department Name: ${department.name}</h1>
-        <table border="1">
-            <tr>
-                <td>Name</td>
-                <td>${department.name}</td>
-            </tr>
-            <tr>
-                <td>Parent</td>
-                <td>${department.parent}</td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td>${department.address}</td>
-            </tr>
-            <tr>
-                <td>Memo</td>
-                <td>${department.memo}</td>
-            </tr>
-        </table>
+        <form action = "" method = "POST" >
+            <table border="1">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="departmentName" value="${department.name}" /></td>
+                </tr>
+                <tr>
+                    <td>Parent</td>
+                    <td><input type="text" name="departmentParent" value="${department.parent}" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><input type="text" name="departmentAddress" value="${department.address}" /></td>
+                </tr>
+                <tr>
+                    <td>Memo</td>
+                    <td><input type="text" name="departmentMemo" value="${department.memo}" /></td>
+                </tr>
+            </table>
+            <input type = "submit" name = "action" value = "Update"/>
+            <input type = "submit" name = "action" value = "Delete"/>
+        </form>
         <br/>
         <br/>
         <table border="1">
