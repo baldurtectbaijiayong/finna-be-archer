@@ -32,6 +32,8 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             ResultSet resultSet = statement.executeQuery("select * from department");
             while(resultSet.next()) {
                 response.getWriter().println(resultSet.getString("name"));
+                response.getWriter().println(resultSet.getString("parent"));
+                response.getWriter().println(resultSet.getString("address"));
             }
             resultSet.close();
             statement.close();
