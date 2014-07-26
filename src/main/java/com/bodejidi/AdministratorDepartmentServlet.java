@@ -28,7 +28,13 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-            response.getWriter().println(connection);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from department");
+            while(resultSet.next()) {
+                response.getWriter().println(resultSet.getString("name"));
+            }
+            resultSet.close();
+            statement.close();
             connection.close();
         } catch (SQLException sqle) {
             response.getWriter().println("cannot connect to db");
