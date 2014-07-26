@@ -161,4 +161,54 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             }
         }
     }
+    
+    public void doPost(HttpServletRequest request,HttpServletResponse response)
+        throws IOException,ServletException{
+        String action = request.getParameter("action");
+        String sql = null;
+        
+        if(action == "Update") {
+        }
+        
+        if(action.equals("Delete")) {
+            response.getWriter().println("Department Show");
+            
+            Connection connection = null;
+            Statement statement = null;
+            response.getWriter().println(request.getParameter("departmentId"));
+            
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch(Exception e) {
+            
+            }
+            
+            try {
+                sql = "delete from department where id=" + request.getParameter("departmentId");
+
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                statement = connection.createStatement();
+                statement.executeUpdate(sql);
+            } catch (SQLException sqle) {
+                response.getWriter().println(sqle);
+                sqle.printStackTrace();
+            }
+            
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(Exception e) {
+                    
+                }
+            }
+            
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(Exception e) {
+                
+                }
+            }
+        }
+    }
 }
