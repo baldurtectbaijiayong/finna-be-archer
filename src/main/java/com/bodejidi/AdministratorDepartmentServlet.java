@@ -18,10 +18,12 @@ import java.util.ArrayList;
 public class AdministratorDepartmentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response)
         throws IOException,ServletException{
+        String sql;
         
         if(request.getParameter("departmentId") == null){
             response.getWriter().println("Department List");
             
+            sql = "select * from department";
             Connection connection = null;
             Statement statement = null;
             ResultSet resultSet = null;
@@ -36,7 +38,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                 statement = connection.createStatement();
-                resultSet = statement.executeQuery("select * from department");
+                resultSet = statement.executeQuery(sql);
                 while(resultSet.next()) {
                     Department department = new Department();
                     
@@ -75,17 +77,17 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 }
             }
             
-            for(Department department: departments){
-                response.getWriter().println(department.getName());
-                response.getWriter().println(department.getParent());
-                response.getWriter().println(department.getAddress());
-            }
+            request.setAttribute("departmentList", departments);
+            getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/administrator/department/list.jsp")
+                .forward(request, response);
         } else {
             response.getWriter().println("Department Show");
             
             Connection connection = null;
             Statement statement = null;
             ResultSet resultSet = null;
+            List<Contact> contacts = new ArrayList();
             Department department = new Department();
             
             try {
@@ -95,14 +97,29 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             }
             
             try {
+                sql = "select * from  department,contact,contact_department where "
+                + "department.id='" 
+                + request.getParameter("departmentId") 
+                + "'and contact_department.id_department=department.id and" 
+                + " contact.id=contact_department.id_contact";
+
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                 statement = connection.createStatement();
-                resultSet = statement.executeQuery("select * from department where id=2");
-                if(resultSet.next()) {
-                    department.setId(resultSet.getLong("id"));
-                    department.setName(resultSet.getString("name"));
-                    department.setParent(resultSet.getString("parent"));
-                    department.setAddress(resultSet.getString("address"));
+                resultSet = statement.executeQuery(sql);
+                while(resultSet.next()) {
+                    Contact contact = new Contact();
+                    
+                    contact.setId(resultSet.getLong("contact.id"));
+                    contact.setName(resultSet.getString("contact.name"));
+                    contact.setMobile(resultSet.getString("contact.mobile"));
+                    contact.setDepartment(resultSet.getString("department.name"));
+                    department.setId(resultSet.getLong("department.id"));
+                    department.setName(resultSet.getString("department.name"));
+                    department.setMemo(resultSet.getString("department.memo"));
+                    department.setParent(resultSet.getString("department.parent"));
+                    department.setAddress(resultSet.getString("department.address"));
+                    
+                    contacts.add(contact);
                 }
             } catch (SQLException sqle) {
                 sqle.printStackTrace();
@@ -132,10 +149,13 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 }
             }
             
-            if(department.getId() != null){
-                response.getWriter().println(department.getName());
-                response.getWriter().println(department.getParent());
-                response.getWriter().println(department.getAddress());
+            if(department.getName() != null){
+                request.setAttribute("contactList", contacts);
+                request.setAttribute("department", department);
+
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/department/show.jsp")
+                    .forward(request, response);
             } else {
                 response.getWriter().println("cannot find this department");
             }
