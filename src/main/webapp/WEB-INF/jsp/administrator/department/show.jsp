@@ -36,6 +36,7 @@ Department department = (Department) request.getAttribute("department");
                 <td>name</td>
                 <td>mobile</td>
                 <td>department</td>
+                <td>operation</td>
             </tr>
             
             <c:forEach var="contact" items="${contactList}">
@@ -43,6 +44,7 @@ Department department = (Department) request.getAttribute("department");
                 <td><a href="../contact/list?contactId=${contact.id}">${contact.name}</td>
                 <td>${contact.mobile}</td>
                 <td>${contact.department}</td>
+                <td><a href="">update</a>&nbsp;|&nbsp;<a href="">delete</a></td>
             <tr>
             </c:forEach>
             
