@@ -10,7 +10,9 @@ List<Department> departmentList = (List<Department>) request.getAttribute("depar
 		</title>
 	</head>
 	<body>
-		<table>
+        <a href="../contact/list">Back</a>
+        <h1>Department List</h1>
+		<table border="1">
 		<tr>
 			<td>name</td>
 			<td>memo</td>
