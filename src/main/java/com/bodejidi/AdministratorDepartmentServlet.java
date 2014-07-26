@@ -24,10 +24,6 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         Statement statement = null;
         ResultSet resultSet = null;
         
-        String name = null;
-        String parent = null;
-        String address = null;
-        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch(Exception e) {
@@ -39,13 +35,16 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("select * from department");
             while(resultSet.next()) {
-                name = resultSet.getString("name");
-                parent = resultSet.getString("parent");
-                address = resultSet.getString("address");
+                Department department = new Department();
+                
+                department.setId(resultSet.getLong("id"));
+                department.setName(resultSet.getString("name"));
+                department.setParent(resultSet.getString("parent"));
+                department.setAddress(resultSet.getString("address"));
             
-                response.getWriter().println(name);
-                response.getWriter().println(parent);
-                response.getWriter().println(address);
+                response.getWriter().println(department.getName());
+                response.getWriter().println(department.getParent());
+                response.getWriter().println(department.getAddress());
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
