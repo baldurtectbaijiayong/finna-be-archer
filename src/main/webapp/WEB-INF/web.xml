@@ -127,4 +127,14 @@ you may not use this file except in compliance with
         <servlet-name>AdministratorContactCreate</servlet-name>
         <url-pattern>/administrator/contact/create</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdministratorDepartmentCreate</servlet-name>
+        <servlet-class>com.bodejidi.AdministratorDepartmentCreateServlet</servlet-class>
+    </servlet>
+  
+    <servlet-mapping>
+        <servlet-name>AdministratorDepartmentCreate</servlet-name>
+        <url-pattern>/administrator/department/create</url-pattern>
+    </servlet-mapping>
 </web-app>

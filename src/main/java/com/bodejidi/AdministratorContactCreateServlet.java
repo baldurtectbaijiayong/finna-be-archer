@@ -73,7 +73,7 @@ public class AdministratorContactCreateServlet extends HttpServlet {
             if(resultSet != null){
                 resultSet.next();
                 contact.setDepartmentId(resultSet.getLong("id"));
-            }
+            } 
             
             statement.executeUpdate("insert into contact_department values(" 
                 + contact.getId() + "," + contact.getDepartmentId() + ")");
