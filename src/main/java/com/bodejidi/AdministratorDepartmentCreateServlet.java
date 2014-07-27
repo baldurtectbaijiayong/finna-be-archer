@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+
 public class AdministratorDepartmentCreateServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
@@ -16,6 +20,20 @@ public class AdministratorDepartmentCreateServlet extends HttpServlet {
     
      public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
-        response.getWriter().println("success");
+        Connection connection = null;
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch(Exception e){
+            response.getWriter().println(e);
+        }
+        
+        try{
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+            response.getWriter().println(connection);
+            connection.close();
+        } catch(SQLException sqle){
+            response.getWriter().println(sqle);
+        }
     }
 }
