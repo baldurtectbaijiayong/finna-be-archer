@@ -1,8 +1,8 @@
 <%@ page import="java.util.List, com.bodejidi.Department, com.bodejidi.Contact"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-List<Contact> contactList = (List<Contact>) request.getAttribute("contactList");
-Department department = (Department) request.getAttribute("department"); 
+List<Contact> contactList=(List<Contact>) request.getAttribute("contactList");
+Department department=(Department) request.getAttribute("department"); 
 %>
 <html>
     <head>
@@ -11,7 +11,7 @@ Department department = (Department) request.getAttribute("department");
     <body>
         <a href="list">Department List</a>
         <h1>Department Name: ${department.name}</h1>
-        <form action = "" method = "POST" >
+        <form action="" method="POST" >
             <table border="1">
                 <tr>
                     <td>Name</td>
@@ -30,8 +30,8 @@ Department department = (Department) request.getAttribute("department");
                     <td><input type="text" name="departmentMemo" value="${department.memo}" /></td>
                 </tr>
             </table>
-            <input type = "submit" name = "action" value = "Update"/>
-            <input type = "submit" name = "action" value = "Delete"/>
+            <input type="submit" name="action" value="Update"/>
+            <input type="submit" name="action" value="Delete"/>
         </form>
         <br/>
         <br/>
