@@ -167,7 +167,57 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         String action = request.getParameter("action");
         String sql = null;
         
-        if(action == "Update") {
+        Department department = new Department();
+       
+        department.setName(request.getParameter("departmentName"));
+        department.setMemo(request.getParameter("departmentMemo"));
+        department.setParent(request.getParameter("departmentParent"));
+        department.setAddress(request.getParameter("departmentAddress"));
+
+        if(action.equals("Update")) {
+            String id = request.getParameter("departmentId");
+            
+            Connection connection = null;
+            Statement statement = null;
+            
+            response.getWriter().println("Update " + id + " department Success!");
+     
+            sql = "update department set name = '" 
+                + department.getName() + "', memo = '" 
+                + department.getMemo() + "', parent = '" 
+                + department.getParent() + "', address = '" 
+                + department.getAddress() + "' WHERE id = " + id;
+            
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch(Exception e) {
+            
+            }
+    
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                statement = connection.createStatement();
+                statement.executeUpdate(sql);
+            } catch (SQLException sqle) {
+                response.getWriter().println(sqle);
+                sqle.printStackTrace();
+            }
+            
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(Exception e) {
+                    
+                }
+            }
+            
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(Exception e) {
+                
+                }
+            }
         }
         
         if(action.equals("Delete")) {
