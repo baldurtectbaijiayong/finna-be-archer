@@ -40,7 +40,7 @@ public class ContactListServlet extends HttpServlet{
                 resultSet = statement.executeQuery(sql);
                 
                 while (resultSet.next()){
-					Contact contact = new Contact();
+                    Contact contact = new Contact();
 
                     contact.setId(resultSet.getLong("contact.id"));
                     contact.setName(resultSet.getString("contact.name"));
