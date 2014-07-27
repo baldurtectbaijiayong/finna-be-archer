@@ -117,5 +117,14 @@ you may not use this file except in compliance with
         <servlet-name>AdministratorDepartment</servlet-name>
         <url-pattern>/administrator/department/list</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>AdministratorContactCreate</servlet-name>
+        <servlet-class>com.bodejidi.AdministratorContactCreateServlet</servlet-class>
+    </servlet>
+  
+    <servlet-mapping>
+        <servlet-name>AdministratorContactCreate</servlet-name>
+        <url-pattern>/administrator/contact/create</url-pattern>
+    </servlet-mapping>
 </web-app>

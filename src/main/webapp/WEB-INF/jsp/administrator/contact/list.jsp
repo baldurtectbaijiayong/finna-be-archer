@@ -13,6 +13,7 @@
     <body>
         <a href="../department/list">Department List</a>
         <h1>All Contacts</h1>
+        <a href="create">Create Contact</a>
         <table border = "1">
             <tr>
                 <td>name</td>
