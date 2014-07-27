@@ -169,6 +169,74 @@ public class AdministratorContactServlet extends HttpServlet{
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        Contact contact = new Contact();
+        contact.setName(request.getParameter("contactName"));
+        contact.setMobile(request.getParameter("contactMobile"));
+        contact.setVpmn(request.getParameter("contactVpmn"));
+        contact.setEmail(request.getParameter("contactEmail"));
+        contact.setHomeAddress(request.getParameter("contactHomeAddress"));
+        contact.setOfficeAddress(request.getParameter("contactOfficeAddress"));
+        contact.setJob(request.getParameter("contactJob"));
+        contact.setJobLevel(Long.valueOf(request.getParameter("contactJobLevel")));
+        
+        if(action.equals("Update")){
+            try{
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            }catch(Exception ex){
+                //handl the error
+            }
+            
+            if(request.getParameter("contactId") != null && request.getParameter("contactId") != ""){
+                try{
+                    sql = "update contact set name='" 
+                        + contact.getName() +"', mobile='"
+                        + contact.getMobile() +"', vpmn='"
+                        + contact.getVpmn() +"', email='"
+                        + contact.getEmail() +"', home_address='"
+                        + contact.getHomeAddress() +"', office_address='"
+                        + contact.getOfficeAddress() +"', memo='"
+                        + contact.getMemo() +"', job='"
+                        + contact.getJob() +"', job_level='"
+                        + contact.getJobLevel() +"' where id="
+                        + request.getParameter("contactId");
+                        
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
+                    statement = connection.createStatement();
+                    statement.executeUpdate(sql); 
+                    response.getWriter().println("The Contact has been up-to-date.");
+               
+                }catch(SQLException sqle){
+                    response.getWriter().println("can not connect to DB");
+                    response.getWriter().println(sqle.getMessage());
+                    sqle.printStackTrace();
+                }
+                
+                if(resultSet != null){
+                    try{
+                        resultSet.close();
+                    }catch(Exception ex){
+                    
+                    }
+                }
+                
+                if(statement != null){
+                    try{
+                        statement.close();
+                    }catch(Exception ex){
+                    
+                    }
+                }
+                
+                if(connection != null){
+                    try{
+                        connection.close();
+                    }catch(Exception e){
+                    
+                    }
+                }
+            }
+        }
+        
         
         if(action.equals("Delete")){
             try{
@@ -181,8 +249,6 @@ public class AdministratorContactServlet extends HttpServlet{
                 try{
                     sql = "delete from contact where id=" 
                         + request.getParameter("contactId");
-                    
-                    Contact contact = new Contact();
                     
                     connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                     statement = connection.createStatement();
