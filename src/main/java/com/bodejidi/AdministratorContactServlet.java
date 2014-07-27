@@ -226,6 +226,10 @@ public class AdministratorContactServlet extends HttpServlet{
                     
                     }
                 }
+                request.setAttribute("contact",contact);
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/updateSuccess.jsp")
+                    .forward(request, response);   
             }
         }
         
