@@ -168,7 +168,7 @@ public class AdministratorContactServlet extends HttpServlet{
         String action = request.getParameter("action");
         Connection connection = null;
         Statement statement = null;
-        ResultSet resultSet = null;
+        
         Contact contact = new Contact();
         contact.setName(request.getParameter("contactName"));
         contact.setMobile(request.getParameter("contactMobile"));
@@ -209,14 +209,6 @@ public class AdministratorContactServlet extends HttpServlet{
                     response.getWriter().println("can not connect to DB");
                     response.getWriter().println(sqle.getMessage());
                     sqle.printStackTrace();
-                }
-                
-                if(resultSet != null){
-                    try{
-                        resultSet.close();
-                    }catch(Exception ex){
-                    
-                    }
                 }
                 
                 if(statement != null){
