@@ -253,14 +253,6 @@ public class AdministratorContactServlet extends HttpServlet{
                     sqle.printStackTrace();
                 }
                 
-                if(resultSet != null){
-                    try{
-                        resultSet.close();
-                    }catch(Exception ex){
-                    
-                    }
-                }
-                
                 if(statement != null){
                     try{
                         statement.close();
