@@ -97,8 +97,8 @@ you may not use this file except in compliance with
 	    <servlet-name>administrator</servlet-name>
         <url-pattern>/administrator/login</url-pattern>
     </servlet-mapping>
-  
-	<servlet>
+    
+    <servlet>
         <servlet-name>AdministratorContact</servlet-name>
         <servlet-class>com.bodejidi.AdministratorContactServlet</servlet-class>
     </servlet>
