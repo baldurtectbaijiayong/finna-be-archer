@@ -30,12 +30,11 @@ public class DepartmentShowServlet extends HttpServlet{
         List contacts = new ArrayList();
         Department department = new Department();
 
-        try	{
-			Class.forName("com.mysql.jdbc.Driver");
-			
-		}catch(Exception e){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");	
+        }catch(Exception e){
             //ignore;
-		}
+        }
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
             statement = connection.createStatement();
@@ -84,11 +83,10 @@ public class DepartmentShowServlet extends HttpServlet{
         }
         if (connection != null){
             try{
-            
                 connection.close();		
             }catch(SQLException sqle){
                 
             }
         }    
-	}
+    }
 }

@@ -2,7 +2,7 @@ package com.bodejidi;
 
 public class Department
 {
-	private Long id;
+    private Long id;
     private String name;
     private String memo;
     private String parent;
