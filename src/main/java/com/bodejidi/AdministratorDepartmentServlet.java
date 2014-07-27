@@ -218,6 +218,9 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 
                 }
             }
+            getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
+                    .forward(request, response);   
         }
         
         if(action.equals("Delete")) {
@@ -259,6 +262,9 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 
                 }
             }
+            getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
+                    .forward(request, response);   
         }
     }
 }

@@ -226,9 +226,8 @@ public class AdministratorContactServlet extends HttpServlet{
                     
                     }
                 }
-                request.setAttribute("contact",contact);
                 getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/updateSuccess.jsp")
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
                     .forward(request, response);   
             }
         }
@@ -272,6 +271,9 @@ public class AdministratorContactServlet extends HttpServlet{
                     
                     }
                 }
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
+                    .forward(request, response);   
             }
         }
     }
