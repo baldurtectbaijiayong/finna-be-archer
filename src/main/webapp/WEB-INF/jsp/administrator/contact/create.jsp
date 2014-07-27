@@ -24,11 +24,11 @@
                 </tr>
                 <tr>
                     <td>HomeAddress</td>
-                    <td><input type="text" name="home_address"/></td>
+                    <td><input type="text" name="homeAddress"/></td>
                 </tr>
                 <tr>
                     <td>OfficeAddress</td>
-                    <td><input type="text" name="office_address"/></td>
+                    <td><input type="text" name="officeAddress"/></td>
                 </tr>
                 <tr>
                     <td>Job</td>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>JobLevel</td>
-                    <td><input type="text" name="job_level"/></td>
+                    <td><input type="text" name="jobLevel"/></td>
                 </tr>
                 <tr>
                     <td>Department</td>
