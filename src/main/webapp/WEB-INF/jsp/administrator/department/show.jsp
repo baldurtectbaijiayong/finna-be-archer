@@ -35,6 +35,9 @@ Department department=(Department) request.getAttribute("department");
         </form>
         <br/>
         <br/>
+        <h3>${department.name} Contacts List</h3>
+       
+        <h7><a href="../contact/create?department=${department.name}">Create</a></h7>
         <table border="1">
             <tr>
                 <td>name</td>
