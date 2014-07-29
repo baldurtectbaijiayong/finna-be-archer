@@ -15,9 +15,19 @@ import java.sql.DriverManager;
 public class AdministratorContactCreateServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
-        getServletContext()
-            .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/create.jsp")
-            .forward(request, response);
+        
+        String departmentParameter = request.getParameter("department");
+        
+        if(departmentParameter != null && departmentParameter != ""){
+            request.setAttribute("department",departmentParameter);
+
+            System.out.println(departmentParameter);
+            getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/create.jsp")
+                .forward(request, response);
+           
+        } 
+       
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)

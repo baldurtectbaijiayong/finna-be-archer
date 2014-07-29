@@ -1,3 +1,6 @@
+<% 
+    String departmentParameter = (String)request.getAttribute("department");
+%>
 <html>
     <head>
         <title>Create Contact</title>
@@ -41,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>Department</td>
-                    <td><input type="text" name="contactDepartment"/></td>
+                    <td><input type="text" name="contactDepartment" value="<%=  departmentParameter %>"/></td>
                 </tr>
             </table>
             <input type="submit" name="action" value="Create"/>
