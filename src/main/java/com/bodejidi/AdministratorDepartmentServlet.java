@@ -150,16 +150,20 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 }
             }
             
-           // if(department.getName() != null){
+            if(contacts.get(0).getName() != null){
                 request.setAttribute("contactList", contacts);
                 request.setAttribute("department", department);
 
                 getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/administrator/department/show.jsp")
                     .forward(request, response);
-          /*  } else {
-                response.getWriter().println("cannot find this department");
-            }*/
+            } else {
+                request.setAttribute("department", department);
+
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/department/show.jsp")
+                    .forward(request, response);
+            }
         }
     }
     
