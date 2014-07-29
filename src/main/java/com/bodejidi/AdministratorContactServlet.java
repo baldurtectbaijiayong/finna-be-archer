@@ -95,10 +95,11 @@ public class AdministratorContactServlet extends HttpServlet{
             }
         }else{
             try{
-                sql = "select * from  department,contact,contact_department"
-                    + " where contact_department.id_department=department.id and" 
-                    + " contact.id=contact_department.id_contact";
-                    
+              
+                sql = "select * from (contact left join contact_department on"
+                    + "contact.id=contact_department.id_contact)left join department on "
+                    + "contact_department.id_department=department.id";
+             
                 List<Contact> contacts = new ArrayList();
             
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
