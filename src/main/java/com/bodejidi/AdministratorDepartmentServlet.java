@@ -44,6 +44,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                     
                     department.setId(resultSet.getLong("id"));
                     department.setName(resultSet.getString("name"));
+                    department.setMemo(resultSet.getString("memo"));
                     department.setParent(resultSet.getString("parent"));
                     department.setAddress(resultSet.getString("address"));
                 
