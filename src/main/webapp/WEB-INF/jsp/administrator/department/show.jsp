@@ -30,6 +30,7 @@ Department department=(Department) request.getAttribute("department");
                     <td><input type="text" name="departmentMemo" value="${department.memo}" /></td>
                 </tr>
             </table>
+            <input type="hidden" name="hiddenDepartmentId" value="${department.id}"/>
             <input type="submit" name="action" value="Update"/>
             <input type="submit" name="action" value="Delete"/>
         </form>

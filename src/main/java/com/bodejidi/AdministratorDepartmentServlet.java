@@ -169,7 +169,8 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         String sql = null;
         
         Department department = new Department();
-       
+
+        department.setId(Long.valueOf(request.getParameter("hiddenDepartmentId")));       
         department.setName(request.getParameter("departmentName"));
         department.setMemo(request.getParameter("departmentMemo"));
         department.setParent(request.getParameter("departmentParent"));
@@ -238,7 +239,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             }
             
             try {
-                sql = "delete from department where id=" + request.getParameter("departmentId");
+                sql = "delete from department where id=" + department.getId();
 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                 statement = connection.createStatement();
