@@ -52,7 +52,7 @@ Department department=(Department) request.getAttribute("department");
                 <td><a href="../contact/list?contactId=${contact.id}">${contact.name}</td>
                 <td>${contact.mobile}</td>
                 <td>${contact.department}</td>
-                <td><a href="">update</a>&nbsp;|&nbsp;<a href="">delete</a></td>
+                <td><a href="../contact/list?contactId=${contact.id}">Update</a>&nbsp;|&nbsp;<a href="../contact/list?contactId=${contact.id}">Delete</a></td>
             <tr>
             </c:forEach>
             
