@@ -17,17 +17,12 @@ public class AdministratorContactCreateServlet extends HttpServlet {
         throws IOException, ServletException {
         
         String departmentParameter = request.getParameter("department");
-        
-        if(departmentParameter != null && departmentParameter != ""){
-            request.setAttribute("department",departmentParameter);
-
-            System.out.println(departmentParameter);
-            getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/create.jsp")
-                .forward(request, response);
-           
-        } 
        
+        request.setAttribute("department",departmentParameter); 
+        
+        getServletContext()
+            .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/create.jsp")
+            .forward(request, response);
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)
