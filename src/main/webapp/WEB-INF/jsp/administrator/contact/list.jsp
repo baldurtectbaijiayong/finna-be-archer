@@ -22,12 +22,12 @@
                 <td>operation</td>          
             </tr>
 
-            <c:forEach var = "contact" items= "${contactList}">
+            <c:forEach var="contact" items="${contactList}">
             <tr>
-                <td><a href = "list?contactId=${contact.id}">${contact.name}</td>
+                <td><a href="list?contactId=${contact.id}">${contact.name}</td>
                 <td>${contact.mobile}</td>
-                <td><a href = "../department/list?departmentId=${contact.departmentId}">${contact.department}</td>
-                <td><a href = "?contactId=${contact.id}">Alter&nbsp;|&nbsp;<a href = "?contactId=${contact.id}">Delete</td>
+                <td><a href="../department/list?departmentId=${contact.departmentId}">${contact.department}</td>
+                <td><button><a href="?contactId=${contact.id}">Alter</a></button>&nbsp;|&nbsp;<button><a href="?contactId=${contact.id}">Delete</a></button></td>
             </tr>
             </c:forEach>
         </table>

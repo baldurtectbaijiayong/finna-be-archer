@@ -31,12 +31,11 @@ public class AdministratorContactServlet extends HttpServlet{
         }
         if(request.getParameter("contactId") != null && request.getParameter("contactId") != ""){
             try{
-                sql = "select * from  department,contact,contact_department where "
-                    + "contact.id='" 
-                    + request.getParameter("contactId") 
-                    + "'and contact_department.id_department=department.id and" 
-                    + " contact.id=contact_department.id_contact";
-                    
+                sql = "select * from (contact left join contact_department on "
+                    + "contact.id=contact_department.id_contact)left join department on "
+                    + "contact_department.id_department=department.id "
+                    + "where contact.id=" + request.getParameter("contactId");
+    
                 Contact contact = new Contact();
                 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");

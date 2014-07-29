@@ -98,11 +98,11 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             }
             
             try {
-                sql = "select * from  department,contact,contact_department where "
-                + "department.id='" 
-                + request.getParameter("departmentId") 
-                + "'and contact_department.id_department=department.id and" 
-                + " contact.id=contact_department.id_contact";
+                sql = "select * from (department left join contact_department on "
+                + "department.id=contact_department.id_department) left join contact on " 
+                + "contact_department.id_contact=contact.id "
+                + "where department.id=" 
+                + request.getParameter("departmentId");
 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                 statement = connection.createStatement();
@@ -150,7 +150,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                 }
             }
             
-            if(department.getName() != null){
+            if(contacts.get(0).getName() != null){
                 request.setAttribute("contactList", contacts);
                 request.setAttribute("department", department);
 
@@ -158,7 +158,11 @@ public class AdministratorDepartmentServlet extends HttpServlet {
                     .getRequestDispatcher("/WEB-INF/jsp/administrator/department/show.jsp")
                     .forward(request, response);
             } else {
-                response.getWriter().println("cannot find this department");
+                request.setAttribute("department", department);
+
+                getServletContext()
+                    .getRequestDispatcher("/WEB-INF/jsp/administrator/department/show.jsp")
+                    .forward(request, response);
             }
         }
     }
@@ -170,7 +174,6 @@ public class AdministratorDepartmentServlet extends HttpServlet {
         
         Department department = new Department();
 
-        department.setId(Long.valueOf(request.getParameter("hiddenDepartmentId")));       
         department.setName(request.getParameter("departmentName"));
         department.setMemo(request.getParameter("departmentMemo"));
         department.setParent(request.getParameter("departmentParent"));
@@ -239,7 +242,7 @@ public class AdministratorDepartmentServlet extends HttpServlet {
             }
             
             try {
-                sql = "delete from department where id=" + department.getId();
+                sql = "delete from department where id=" + request.getParameter("departmentId");
 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
                 statement = connection.createStatement();
