@@ -27,7 +27,7 @@ List<Department> departmentList = (List<Department>) request.getAttribute("depar
                 <td>${department.memo}</td>
                 <td>${department.parent}</td>
                 <td>${department.address}</td>
-                <td><a href="">update</a>&nbsp;|&nbsp;<a href="">delete</a></td>
+                <td><a href="list?departmentId=${department.id}">update</a>&nbsp;|&nbsp;<a href="list?departmentId=${department.id}">delete</a></td>
             </tr>
             </c:forEach>
         </table>
