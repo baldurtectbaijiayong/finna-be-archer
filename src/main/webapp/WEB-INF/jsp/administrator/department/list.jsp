@@ -13,6 +13,7 @@ List<Department> departmentList = (List<Department>) request.getAttribute("depar
         <a href="../contact/list">Contact List</a>
         <h1>Department List</h1>
         <a href="create">Create Department</a>
+        <form action="" method="POST">
         <table border="1">
             <tr>
                 <td>name</td>
@@ -27,9 +28,10 @@ List<Department> departmentList = (List<Department>) request.getAttribute("depar
                 <td>${department.memo}</td>
                 <td>${department.parent}</td>
                 <td>${department.address}</td>
-                <td><button><a href="list?departmentId=${department.id}">Alter</a></button>&nbsp;|&nbsp;<button><a href="list?departmentId=${department.id}">Delete</a></button></td>
+                <td><input type="hidden" name="hiddenDepartmentId" value="${department.id}"/><button><a href="list?departmentId=${department.id}">Alter</a></button>&nbsp;|&nbsp;<input type="submit" name="action" value="Delete"/></td>
             </tr>
             </c:forEach>
         </table>
+        </form>
 	</body>
 </html>
