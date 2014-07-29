@@ -96,7 +96,7 @@ public class AdministratorContactServlet extends HttpServlet{
         }else{
             try{
               
-                sql = "select * from (contact left join contact_department on"
+                sql = "select * from (contact left join contact_department on "
                     + "contact.id=contact_department.id_contact)left join department on "
                     + "contact_department.id_department=department.id";
              
