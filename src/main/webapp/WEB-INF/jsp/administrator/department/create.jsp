@@ -3,6 +3,7 @@
         <title>Create Department</title>
     </head>
     <body>
+        <a href="list">Department List</a>
         <h1>Create Department</h1>
         <form action="" method="POST">
             <table border="1">

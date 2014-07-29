@@ -3,6 +3,7 @@
         <title>Create Contact</title>
     </head>
     <body>
+        <a href="list">Contact List</a>
         <h1>Create Contact</h1>
         <form action="" method="POST">
             <table border="1">
