@@ -66,5 +66,8 @@ public class AdministratorDepartmentCreateServlet extends HttpServlet {
                 response.getWriter().println(e);
             }
         } 
+        getServletContext()
+            .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
+            .forward(request, response);   
     }
 }
