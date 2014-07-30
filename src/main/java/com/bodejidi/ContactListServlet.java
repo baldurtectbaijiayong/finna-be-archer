@@ -29,9 +29,9 @@ public class ContactListServlet extends HttpServlet{
             String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
             List contacts = new ArrayList();
             
+            connectAndCreateStatement();
+            
             try { 
-                connection = connectDatabase();
-                statement = connection.createStatement();  
                 resultSet = statement.executeQuery(sql);
             } catch(SQLException sqle) {
                 response.getWriter().println("can not connect Database.");
@@ -78,16 +78,20 @@ public class ContactListServlet extends HttpServlet{
         }
     }
 
-    public Connection connectDatabase() throws SQLException {
+    public void connectAndCreateStatement() {
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         }catch(Exception e){
             //ignore
         }
         
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");      
-        
-        return connection;
+        try { 
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");      
+            statement = connection.createStatement(); 
+
+        } catch(SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
     
     public void render(HttpServletRequest request, HttpServletResponse response, String page, Map<String,Object> dataModel)
