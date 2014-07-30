@@ -19,85 +19,34 @@ import java.util.HashMap;
 
 public class ContactListServlet extends HttpServlet{
 
-    Connection connection = null;
-    Statement statement = null;
-    ResultSet resultSet = null;
-
+    DatabaseManager db = new DatabaseManager();
+    
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
-        connectAndCreateStatement();
-        executeQuery("select * from (contact left join contact_department on "
+        db.connectAndCreateStatement();
+        db.executeQuery("select * from (contact left join contact_department on "
             + "contact.id=contact_department.id_contact)left join department on "
             + "contact_department.id_department=department.id");
             
         Map<String, Object> dataModel = new HashMap<String, Object>();
-        dataModel.put("contactList",addContactToContactsList());
-        closeDatabase();
+        dataModel.put("contactList",addContactToContactsList(db.resultSet));
+        db.close();
         render(request, response, "contact/list",dataModel);
     }
     
-    public List addContactToContactsList(){
+    public List addContactToContactsList(ResultSet resultSet){
         List contacts = new ArrayList();
         
         try {    
             while (resultSet.next()){
-                contacts.add(createContactFromResultSet(resultSet));
+                contacts.add(createContactFromResultSet(db.resultSet));
             }
         }catch(SQLException sqle){
             sqle.printStackTrace();
         }
         return contacts;
     }
-    
-    public void executeQuery(String sql){
-        try { 
-            resultSet = statement.executeQuery(sql);
-        } catch(SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-    
-    public void closeDatabase(){
-        if(resultSet!=null){
-            try{
-                resultSet.close();
-            }catch(Exception e){
-                //ignore; 
-            }
-        }
-           
-         if(statement!=null){
-            try{
-                statement.close();
-            }catch(Exception e){
-                //ignore;                       
-            }
-        }
-        if(connection!=null){
-            try{
-                connection.close();
-            }catch(Exception e){
-                //ignore;  
-            }
-        }
-    }
-
-    public void connectAndCreateStatement() {
-        try{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        }catch(Exception e){
-            //ignore
-        }
-        
-        try { 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");      
-            statement = connection.createStatement(); 
-
-        } catch(SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-    
+   
     public void render(HttpServletRequest request, HttpServletResponse response, String page, Map<String,Object> dataModel)
         throws IOException, ServletException {
         for(String key : dataModel.keySet()) {
@@ -127,4 +76,59 @@ public class ContactListServlet extends HttpServlet{
         
         return contact;
     }
+}
+class DatabaseManager{
+    Connection connection;
+    Statement statement;
+    ResultSet resultSet;
+    
+    public void connectAndCreateStatement() {
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        }catch(Exception e){
+            //ignore
+        }
+        
+        try { 
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");      
+            statement = connection.createStatement(); 
+
+        } catch(SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+    
+    public void executeQuery(String sql){
+        try { 
+            resultSet = statement.executeQuery(sql);
+        } catch(SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+    
+    public void close(){
+        if(resultSet!=null){
+            try{
+                resultSet.close();
+            }catch(Exception e){
+                //ignore; 
+            }
+        }
+           
+         if(statement!=null){
+            try{
+                statement.close();
+            }catch(Exception e){
+                //ignore;                       
+            }
+        }
+        if(connection!=null){
+            try{
+                connection.close();
+            }catch(Exception e){
+                //ignore;  
+            }
+        }
+    }
+   
 }
