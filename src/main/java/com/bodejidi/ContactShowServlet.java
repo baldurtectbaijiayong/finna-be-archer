@@ -17,10 +17,10 @@ import java.sql.ResultSet;
 
 public class ContactShowServlet extends HttpServlet
 {
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException
     {
-        String paraId = req.getParameter("contactId");
+        String paraId = request.getParameter("contactId");
         
         String SQLDriver = "com.mysql.jdbc.Driver";
         String SQLURL = "jdbc:mysql://localhost/test?" 
@@ -34,19 +34,17 @@ public class ContactShowServlet extends HttpServlet
         
         if(null == paraId)
         {
-            resp.getWriter().println("Contact not find");
+            response.getWriter().println("Contact not find");
         }
         else
         {
             Long id = Long.valueOf(paraId);
-            String sql = "select * from  department,contact,contact_department where "
-                + "contact.id='" 
-                + req.getParameter("contactId") 
-                + "'and contact_department.id_department=department.id and" 
-                + " contact.id=contact_department.id_contact";
+            String sql = "select * from (contact left join contact_department on "
+                + "contact.id=contact_department.id_contact)left join department on "
+                + "contact_department.id_department=department.id "
+                + "where contact.id=" + request.getParameter("contactId");
                 
-
-            resp.getWriter().println(id);
+            response.getWriter().println(id);
             try
             {
                 Class.forName(SQLDriver).newInstance();    
@@ -77,11 +75,11 @@ public class ContactShowServlet extends HttpServlet
                 contact.setDepartment(resultSet.getString("department.name"));
                 System.out.println(resultSet);
                 
-                req.setAttribute("contact",contact);
+                request.setAttribute("contact",contact);
                 
                 getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
-                    .forward(req, resp);
+                    .forward(request, response);
                 
             }catch(SQLException ex)
             {
