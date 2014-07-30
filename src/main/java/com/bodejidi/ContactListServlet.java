@@ -21,6 +21,11 @@ public class ContactListServlet extends HttpServlet{
  
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
+        
+        render(request, response, "contact/list",getAllContacts());
+    }
+    
+    public Map<String,Object> getAllContacts(){
         DatabaseManager db = new DatabaseManager();
         db.connectAndCreateStatement();
         ResultSet resultSet = db.executeQuery("select * from (contact left join contact_department on "
@@ -29,8 +34,8 @@ public class ContactListServlet extends HttpServlet{
             
         Map<String, Object> dataModel = new HashMap<String, Object>();
         dataModel.put("contactList",addContactToContactsList(resultSet));
-        db.close();
-        render(request, response, "contact/list",dataModel);
+        db.close(); 
+        return dataModel;
     }
     
     public List addContactToContactsList(ResultSet resultSet){
