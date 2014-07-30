@@ -61,12 +61,9 @@ public class ContactListServlet extends HttpServlet{
             }
             
             closeDatabase();
-
+            
             request.setAttribute("contactList",contacts);
-            getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/contact/list.jsp")
-                .forward(request,response);
-
+            forward(request, response, "contact/list");
     }
     
     public void closeDatabase(){
@@ -95,7 +92,6 @@ public class ContactListServlet extends HttpServlet{
     }
 
     public Connection connectDatabase() throws SQLException {
-            
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         }catch(Exception e){
@@ -107,5 +103,10 @@ public class ContactListServlet extends HttpServlet{
         return connection;
     }
     
-    
+    public void forward(HttpServletRequest request, HttpServletResponse response, String page)
+        throws IOException, ServletException{
+        getServletContext()
+            .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
+            .forward(request,response);
+    }
 }
