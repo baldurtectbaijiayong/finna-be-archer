@@ -25,26 +25,28 @@ public class ContactListServlet extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
-            List contacts = new ArrayList();
+        connectAndCreateStatement();
+        executeQuery("select * from (contact left join contact_department on "
+            + "contact.id=contact_department.id_contact)left join department on "
+            + "contact_department.id_department=department.id");
             
-            connectAndCreateStatement();
-            executeQuery("select * from (contact left join contact_department on "
-                    + "contact.id=contact_department.id_contact)left join department on "
-                    + "contact_department.id_department=department.id");
-
-            try {    
-                while (resultSet.next()){
-                    contacts.add(createContactFromResultSet(resultSet));
-                }
-            }catch(SQLException sqle){
-                response.getWriter().println("Can not connect DB");
+        Map<String, Object> dataModel = new HashMap<String, Object>();
+        dataModel.put("contactList",addContactToContactsList());
+        closeDatabase();
+        render(request, response, "contact/list",dataModel);
+    }
+    
+    public List addContactToContactsList(){
+        List contacts = new ArrayList();
+        
+        try {    
+            while (resultSet.next()){
+                contacts.add(createContactFromResultSet(resultSet));
             }
-            
-            closeDatabase();
-            
-            Map<String, Object> dataModel = new HashMap<String, Object>();
-            dataModel.put("contactList",contacts);
-            render(request, response, "contact/list",dataModel);
+        }catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        return contacts;
     }
     
     public void executeQuery(String sql){
