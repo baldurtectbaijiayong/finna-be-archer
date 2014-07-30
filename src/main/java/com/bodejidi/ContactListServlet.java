@@ -19,29 +19,30 @@ import java.util.HashMap;
 
 public class ContactListServlet extends HttpServlet{
 
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
             
             String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
-            List contacts = new ArrayList();            
-            Connection connection = null;
-            Statement statement = null;
-            ResultSet resultSet = null;
-
-            try{
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-            }catch(Exception e){
-                //ignore
-            }
-            try{
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-                statement = connection.createStatement();
-               
+                        
+            try { 
+                connection = connectDatabase();
+                statement = connection.createStatement();  
                 resultSet = statement.executeQuery(sql);
-                
+            } catch(SQLException sqle) {
+                response.getWriter().println("can not connect Database.");
+                sqle.printStackTrace();
+            }
+            List contacts = new ArrayList();
+            
+            
+            try {    
                 while (resultSet.next()){
                     Contact contact = new Contact();
-
+                    
                     contact.setId(resultSet.getLong("contact.id"));
                     contact.setName(resultSet.getString("contact.name"));
                     contact.setMobile(resultSet.getString("contact.mobile"));
@@ -58,34 +59,50 @@ public class ContactListServlet extends HttpServlet{
             }catch(SQLException sqle){
                 response.getWriter().println("Can not connect DB");
             }
+            
+            closeDatabase();
 
-            if(resultSet!=null){
-                try{
-                    resultSet.close();
-                }catch(Exception e){
-                    //ignore; 
-                }
-            }
-               
-             if(statement!=null){
-                try{
-                    statement.close();
-                }catch(Exception e){
-                    //ignore;                       
-                }
-            }
-            if(connection!=null){
-                try{
-                    connection.close();
-                }catch(Exception e){
-                    //ignore;  
-                }
-            }
             request.setAttribute("contactList",contacts);
             getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/contact/list.jsp")
                 .forward(request,response);
 
     }
+    private void closeDatabase(){
+        if(resultSet!=null){
+            try{
+                resultSet.close();
+            }catch(Exception e){
+                //ignore; 
+            }
+        }
+           
+         if(statement!=null){
+            try{
+                statement.close();
+            }catch(Exception e){
+                //ignore;                       
+            }
+        }
+        if(connection!=null){
+            try{
+                connection.close();
+            }catch(Exception e){
+                //ignore;  
+            }
+        }
+    }
 
+    private Connection connectDatabase() throws SQLException {
+            
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        }catch(Exception e){
+            //ignore
+        }
+        
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");      
+        
+        return connection;
+    }
 }
