@@ -25,19 +25,13 @@ public class ContactListServlet extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
-            
-            String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
             List contacts = new ArrayList();
             
             connectAndCreateStatement();
-            
-            try { 
-                resultSet = statement.executeQuery(sql);
-            } catch(SQLException sqle) {
-                response.getWriter().println("can not connect Database.");
-                sqle.printStackTrace();
-            }
-            
+            executeQuery("select * from (contact left join contact_department on "
+                    + "contact.id=contact_department.id_contact)left join department on "
+                    + "contact_department.id_department=department.id");
+
             try {    
                 while (resultSet.next()){
                     contacts.add(createContactFromResultSet(resultSet));
@@ -51,6 +45,14 @@ public class ContactListServlet extends HttpServlet{
             Map<String, Object> dataModel = new HashMap<String, Object>();
             dataModel.put("contactList",contacts);
             render(request, response, "contact/list",dataModel);
+    }
+    
+    public void executeQuery(String sql){
+        try { 
+            resultSet = statement.executeQuery(sql);
+        } catch(SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
     
     public void closeDatabase(){
