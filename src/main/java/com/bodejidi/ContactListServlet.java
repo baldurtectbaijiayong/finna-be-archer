@@ -18,18 +18,17 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class ContactListServlet extends HttpServlet{
-
-    DatabaseManager db = new DatabaseManager();
-    
+ 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException{
+        DatabaseManager db = new DatabaseManager();
         db.connectAndCreateStatement();
-        db.executeQuery("select * from (contact left join contact_department on "
+        ResultSet resultSet = db.executeQuery("select * from (contact left join contact_department on "
             + "contact.id=contact_department.id_contact)left join department on "
             + "contact_department.id_department=department.id");
             
         Map<String, Object> dataModel = new HashMap<String, Object>();
-        dataModel.put("contactList",addContactToContactsList(db.resultSet));
+        dataModel.put("contactList",addContactToContactsList(resultSet));
         db.close();
         render(request, response, "contact/list",dataModel);
     }
@@ -39,7 +38,7 @@ public class ContactListServlet extends HttpServlet{
         
         try {    
             while (resultSet.next()){
-                contacts.add(createContactFromResultSet(db.resultSet));
+                contacts.add(createContactFromResultSet(resultSet));
             }
         }catch(SQLException sqle){
             sqle.printStackTrace();
@@ -98,12 +97,13 @@ class DatabaseManager{
         }
     }
     
-    public void executeQuery(String sql){
+    public ResultSet executeQuery(String sql){
         try { 
             resultSet = statement.executeQuery(sql);
         } catch(SQLException sqle) {
             sqle.printStackTrace();
         }
+        return resultSet;
     }
     
     public void close(){
