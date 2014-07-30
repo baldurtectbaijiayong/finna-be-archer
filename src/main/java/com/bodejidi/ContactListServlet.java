@@ -48,8 +48,9 @@ public class ContactListServlet extends HttpServlet{
             
             closeDatabase();
             
-            request.setAttribute("contactList",contacts);
-            render(request, response, "contact/list");
+            Map<String, Object> dataModel = new HashMap<String, Object>();
+            dataModel.put("contactList",contacts);
+            render(request, response, "contact/list",dataModel);
     }
     
     public void closeDatabase(){
@@ -89,8 +90,12 @@ public class ContactListServlet extends HttpServlet{
         return connection;
     }
     
-    public void render(HttpServletRequest request, HttpServletResponse response, String page)
-        throws IOException, ServletException{
+    public void render(HttpServletRequest request, HttpServletResponse response, String page, Map<String,Object> dataModel)
+        throws IOException, ServletException {
+        for(String key : dataModel.keySet()) {
+            request.setAttribute(key,dataModel.get(key));
+        }
+        
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
             .forward(request,response);
