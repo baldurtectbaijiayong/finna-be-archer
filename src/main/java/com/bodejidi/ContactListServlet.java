@@ -68,7 +68,8 @@ public class ContactListServlet extends HttpServlet{
                 .forward(request,response);
 
     }
-    private void closeDatabase(){
+    
+    public void closeDatabase(){
         if(resultSet!=null){
             try{
                 resultSet.close();
@@ -93,7 +94,7 @@ public class ContactListServlet extends HttpServlet{
         }
     }
 
-    private Connection connectDatabase() throws SQLException {
+    public Connection connectDatabase() throws SQLException {
             
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -105,4 +106,6 @@ public class ContactListServlet extends HttpServlet{
         
         return connection;
     }
+    
+    
 }
