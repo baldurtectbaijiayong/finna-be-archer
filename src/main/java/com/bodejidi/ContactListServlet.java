@@ -41,20 +41,7 @@ public class ContactListServlet extends HttpServlet{
             
             try {    
                 while (resultSet.next()){
-                    Contact contact = new Contact();
-                    
-                    contact.setId(resultSet.getLong("contact.id"));
-                    contact.setName(resultSet.getString("contact.name"));
-                    contact.setMobile(resultSet.getString("contact.mobile"));
-                    contact.setDepartment(resultSet.getString("department.name"));
-                    contact.setOfficeAddress(resultSet.getString("office_address"));
-                    contact.setHomeAddress(resultSet.getString("home_address"));
-                    contact.setVpmn(resultSet.getString("vpmn"));
-                    contact.setMemo(resultSet.getString("contact.memo"));
-                    contact.setJob(resultSet.getString("job")); 
-                    contact.setJobLevel(resultSet.getLong("job_level"));
-                    contact.setDepartmentId(resultSet.getLong("department.id"));
-                    contacts.add(contact);
+                    contacts.add(createContactFromResultSet(resultSet));
                 }
             }catch(SQLException sqle){
                 response.getWriter().println("Can not connect DB");
@@ -108,5 +95,24 @@ public class ContactListServlet extends HttpServlet{
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
             .forward(request,response);
+    }
+    
+    public Contact createContactFromResultSet(ResultSet resultSet) 
+        throws SQLException {
+        Contact contact = new Contact();
+                    
+        contact.setId(resultSet.getLong("contact.id"));
+        contact.setName(resultSet.getString("contact.name"));
+        contact.setMobile(resultSet.getString("contact.mobile"));
+        contact.setDepartment(resultSet.getString("department.name"));
+        contact.setOfficeAddress(resultSet.getString("office_address"));
+        contact.setHomeAddress(resultSet.getString("home_address"));
+        contact.setVpmn(resultSet.getString("vpmn"));
+        contact.setMemo(resultSet.getString("contact.memo"));
+        contact.setJob(resultSet.getString("job")); 
+        contact.setJobLevel(resultSet.getLong("job_level"));
+        contact.setDepartmentId(resultSet.getLong("department.id"));
+        
+        return contact;
     }
 }
