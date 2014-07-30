@@ -27,7 +27,8 @@ public class ContactListServlet extends HttpServlet{
         throws IOException, ServletException{
             
             String sql = "select * from contact,contact_department,department where contact.id = contact_department.id_contact and contact_department.id_department = department.id";
-                        
+            List contacts = new ArrayList();
+            
             try { 
                 connection = connectDatabase();
                 statement = connection.createStatement();  
@@ -36,8 +37,6 @@ public class ContactListServlet extends HttpServlet{
                 response.getWriter().println("can not connect Database.");
                 sqle.printStackTrace();
             }
-            List contacts = new ArrayList();
-            
             
             try {    
                 while (resultSet.next()){
@@ -50,7 +49,7 @@ public class ContactListServlet extends HttpServlet{
             closeDatabase();
             
             request.setAttribute("contactList",contacts);
-            forward(request, response, "contact/list");
+            render(request, response, "contact/list");
     }
     
     public void closeDatabase(){
@@ -90,7 +89,7 @@ public class ContactListServlet extends HttpServlet{
         return connection;
     }
     
-    public void forward(HttpServletRequest request, HttpServletResponse response, String page)
+    public void render(HttpServletRequest request, HttpServletResponse response, String page)
         throws IOException, ServletException{
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
