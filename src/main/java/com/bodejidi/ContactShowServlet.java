@@ -20,24 +20,18 @@ public class ContactShowServlet extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException
     {
+        ResultSet resultSet = null;
         DatabaseManager db = new DatabaseManager();
         String paraId = request.getParameter("contactId");
-        
-        String SQLDriver = "com.mysql.jdbc.Driver";
-        String SQLURL = "jdbc:mysql://localhost/test?user=root&password=";
-        
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
+        ContactListService contactListService = new ContactListService();              
         Contact contact = new Contact();
         
         if(null == paraId)
         {
             response.getWriter().println("Contact not find");
         }
-        else
-        {
+        else 
+        {   
             Long id = Long.valueOf(paraId);
             String sql = "select * from (contact left join contact_department on "
                 + "contact.id=contact_department.id_contact)left join department on "
@@ -45,41 +39,19 @@ public class ContactShowServlet extends HttpServlet
                 + "where contact.id=" + request.getParameter("contactId");
                 
             response.getWriter().println(id);
-
             db.connectAndCreateStatement();
             resultSet = db.executeQuery(sql);
-            try
-            {
-                resultSet.next();
-               
-                contact.setId(resultSet.getLong("contact.id"));
-                contact.setName(resultSet.getString("contact.name")); 
-                contact.setMobile(resultSet.getString("mobile"));
-                contact.setVpmn(resultSet.getString("vpmn"));
-                contact.setEmail(resultSet.getString("email"));
-                contact.setHomeAddress(resultSet.getString("home_address"));
-                contact.setOfficeAddress(resultSet.getString("office_address"));
-                contact.setMemo(resultSet.getString("contact.memo"));
-                contact.setJob(resultSet.getString("job"));
-                contact.setJobLevel(resultSet.getLong("job_level"));
-                
-                contact.setDepartmentId(resultSet.getLong("department.id"));
-                contact.setDepartment(resultSet.getString("department.name"));
-                System.out.println(resultSet);
-                
-                request.setAttribute("contact",contact);
-                
-                getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
-                    .forward(request, response);
-                
-            }catch(SQLException ex)
-            {
-                System.out.println("SQLException: " + ex.getMessage());
-                System.out.println("SQLStates: " + ex.getSQLState());
-                System.out.println("ErrorCode: " + ex.getErrorCode());
+            try{  
+                if (resultSet.next())
+                contact = contactListService.createContactFromResultSet(resultSet);
+            }catch (SQLException sqle){
+                sqle.printStackTrace();
             }
-        }
+            request.setAttribute("contact",contact);
+            getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
+                .forward(request,response);
+        } 
         db.close();
     } 
 }
