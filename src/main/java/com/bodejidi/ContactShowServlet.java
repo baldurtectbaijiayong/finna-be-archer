@@ -20,6 +20,7 @@ public class ContactShowServlet extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException
     {
+        DatabaseManager db = new DatabaseManager();
         String paraId = request.getParameter("contactId");
         
         String SQLDriver = "com.mysql.jdbc.Driver";
@@ -86,39 +87,8 @@ public class ContactShowServlet extends HttpServlet
                 System.out.println("SQLException: " + ex.getMessage());
                 System.out.println("SQLStates: " + ex.getSQLState());
                 System.out.println("ErrorCode: " + ex.getErrorCode());
-            }finally
-            {
-                if(resultSet != null)
-                {
-                    try
-                    {
-                       resultSet.close();
-                    }catch(SQLException ex)
-                    {
-                        System.out.println(ex);
-                    }
-                }
-                if(statement != null)
-                {
-                    try
-                    {
-                        statement.close();
-                    }catch(SQLException ex)
-                    {
-                        System.out.println(ex);
-                    }    
-                }
-                if(connection != null)
-                {
-                    try
-                    {
-                        connection.close();
-                    }catch(SQLException ex)
-                    {
-                        System.out.println(ex);
-                    }
-                }
-            } 
+            }
         }
+        db.close();
     } 
 }
