@@ -22,12 +22,10 @@ public class ContactListService {
         return dataModel;
     }
     
-    public Contact getContactById(String paraId) {
+    public Contact getContactById(Long id) {
         Contact contact = new Contact();
         DatabaseManager db = new DatabaseManager();
-        db.connectAndCreateStatement();   
-        
-        Long id = Long.valueOf(paraId);
+        db.connectAndCreateStatement();
         String sql = "select * from (contact left join contact_department on "
             + "contact.id=contact_department.id_contact)left join department on "
             + "contact_department.id_department=department.id "
