@@ -13,9 +13,16 @@ public class ContactShowServlet extends HttpServlet
     {
         Long id = Long.valueOf(request.getParameter("contactId"));
         ContactListService contactListService = new ContactListService();
-        request.setAttribute("contact",contactListService.getContactById(id));
-        getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
-                .forward(request,response);
+        String page = "contact/show";
+        render(request, response, page, contactListService.getContactById(id));
+        
     } 
+    
+    public void render(HttpServletRequest request, HttpServletResponse response, String page, Contact contact)
+        throws ServletException, IOException{
+        request.setAttribute("contact",contact);
+        getServletContext()
+                .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
+                .forward(request,response);
+    }
 }
