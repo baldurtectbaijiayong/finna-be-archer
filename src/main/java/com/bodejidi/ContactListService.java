@@ -22,6 +22,28 @@ public class ContactListService {
         return dataModel;
     }
     
+    public Contact getContactById(String paraId) {
+        Contact contact = new Contact();
+        DatabaseManager db = new DatabaseManager();
+        db.connectAndCreateStatement();   
+        
+        Long id = Long.valueOf(paraId);
+        String sql = "select * from (contact left join contact_department on "
+            + "contact.id=contact_department.id_contact)left join department on "
+            + "contact_department.id_department=department.id "
+            + "where contact.id=" + id;
+        ResultSet resultSet = db.executeQuery(sql);
+        try{  
+            if (resultSet.next())
+            contact = createContactFromResultSet(resultSet);
+        }catch (SQLException sqle){
+            sqle.printStackTrace();
+        }     
+        
+        db.close(); 
+        return contact;
+    }
+    
     public List addContactToContactsList(ResultSet resultSet){
         List contacts = new ArrayList();
         

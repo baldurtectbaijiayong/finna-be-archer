@@ -21,37 +21,11 @@ public class ContactShowServlet extends HttpServlet
         throws ServletException, IOException
     {
         ResultSet resultSet = null;
-        DatabaseManager db = new DatabaseManager();
         String paraId = request.getParameter("contactId");
-        ContactListService contactListService = new ContactListService();              
-        Contact contact = new Contact();
-        
-        if(null == paraId)
-        {
-            response.getWriter().println("Contact not find");
-        }
-        else 
-        {   
-            Long id = Long.valueOf(paraId);
-            String sql = "select * from (contact left join contact_department on "
-                + "contact.id=contact_department.id_contact)left join department on "
-                + "contact_department.id_department=department.id "
-                + "where contact.id=" + request.getParameter("contactId");
-                
-            response.getWriter().println(id);
-            db.connectAndCreateStatement();
-            resultSet = db.executeQuery(sql);
-            try{  
-                if (resultSet.next())
-                contact = contactListService.createContactFromResultSet(resultSet);
-            }catch (SQLException sqle){
-                sqle.printStackTrace();
-            }
-            request.setAttribute("contact",contact);
-            getServletContext()
+        ContactListService contactListService = new ContactListService();
+        request.setAttribute("contact",contactListService.getContactById(paraId));
+        getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/contact/show.jsp")
                 .forward(request,response);
-        } 
-        db.close();
     } 
 }
