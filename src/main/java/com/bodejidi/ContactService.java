@@ -22,7 +22,8 @@ public class ContactService {
         return dataModel;
     }
     
-    public Contact getContactById(Long id) {
+    public Map<String, Object> getContactById(Long id) {
+        Map<String, Object> dataModel = new HashMap<String, Object>();
         Contact contact = new Contact();
         DatabaseManager db = new DatabaseManager();
         db.connectAndCreateStatement();
@@ -33,13 +34,12 @@ public class ContactService {
         ResultSet resultSet = db.executeQuery(sql);
         try{  
             if (resultSet.next())
-            contact = createContactFromResultSet(resultSet);
+            dataModel.put("contact",createContactFromResultSet(resultSet));
         }catch (SQLException sqle){
             sqle.printStackTrace();
-        }     
-        
+        }             
         db.close(); 
-        return contact;
+        return dataModel;
     }
     
     public List addContactToContactsList(ResultSet resultSet){

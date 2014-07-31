@@ -22,11 +22,4 @@ public abstract class AbstractFinnalServlet extends HttpServlet {
         .forward(request,response);
     }  
     
-     public void render(HttpServletRequest request, HttpServletResponse response, String page, Contact contact)
-        throws ServletException, IOException{
-        request.setAttribute("contact",contact);
-        getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
-                .forward(request,response);
-    }
 }
