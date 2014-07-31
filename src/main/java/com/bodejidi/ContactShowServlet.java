@@ -24,8 +24,7 @@ public class ContactShowServlet extends HttpServlet
         String paraId = request.getParameter("contactId");
         
         String SQLDriver = "com.mysql.jdbc.Driver";
-        String SQLURL = "jdbc:mysql://localhost/test?" 
-        + "user=root&password=";
+        String SQLURL = "jdbc:mysql://localhost/test?user=root&password=";
         
         Connection connection = null;
         Statement statement = null;
@@ -46,19 +45,11 @@ public class ContactShowServlet extends HttpServlet
                 + "where contact.id=" + request.getParameter("contactId");
                 
             response.getWriter().println(id);
-            try
-            {
-                Class.forName(SQLDriver).newInstance();    
-            }catch(Exception ex)
-            {
-                //ignore;
-            }
 
+            db.connectAndCreateStatement();
+            resultSet = db.executeQuery(sql);
             try
             {
-                connection = DriverManager.getConnection(SQLURL);
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(sql);
                 resultSet.next();
                
                 contact.setId(resultSet.getLong("contact.id"));
