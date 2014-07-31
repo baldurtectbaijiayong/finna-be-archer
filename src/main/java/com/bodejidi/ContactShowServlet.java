@@ -1,12 +1,11 @@
 package com.bodejidi;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-public class ContactShowServlet extends HttpServlet
+public class ContactShowServlet extends AbstractFinnalServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException
@@ -18,11 +17,5 @@ public class ContactShowServlet extends HttpServlet
         
     } 
     
-    public void render(HttpServletRequest request, HttpServletResponse response, String page, Contact contact)
-        throws ServletException, IOException{
-        request.setAttribute("contact",contact);
-        getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/" + page + ".jsp")
-                .forward(request,response);
-    }
+   
 }
