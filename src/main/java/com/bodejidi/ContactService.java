@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ContactListService {
+public class ContactService {
     public Map<String,Object> getAllContacts(){
         DatabaseManager db = new DatabaseManager();
         db.connectAndCreateStatement();

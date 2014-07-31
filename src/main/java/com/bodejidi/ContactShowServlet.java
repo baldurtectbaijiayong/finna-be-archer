@@ -10,10 +10,10 @@ public class ContactShowServlet extends AbstractFinnalServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException
     {
-        Long id = Long.valueOf(request.getParameter("contactId"));
-        ContactListService contactListService = new ContactListService();
+        ContactService contactService = new ContactService();
         String page = "contact/show";
-        render(request, response, page, contactListService.getContactById(id));
+        render(request, response, page, contactService
+            .getContactById(Long.valueOf(request.getParameter("contactId"))));
         
     } 
     
