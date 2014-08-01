@@ -23,30 +23,34 @@ public class DepartmentListServlet extends HttpServlet {
         List<Department> departments = new ArrayList();
         db.connectAndCreateStatement();
         ResultSet resultSet = db.executeQuery(sql);
-        
         try{
             while(resultSet.next()){
-                Department department = new Department();
-                
-                department.setId(resultSet.getLong("id"));
-                department.setName(resultSet.getString("name"));
-                department.setMemo(resultSet.getString("memo"));
-                department.setParent(resultSet.getString("parent"));
-                department.setAddress(resultSet.getString("address"));	
-                
+                Department department = getDepartmentFromResultSet(resultSet);
                 departments.add(department);
             }
-            
         } catch(SQLException sqle) {
-            response.getWriter().println("cannot connect to db");
-            sqle.printStackTrace();
+                sqle.printStackTrace();
         }
+          
         db.close();
-        
         request.setAttribute("departmentList", departments);
-        
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
             .forward(request, response);
     }
+    
+    public Department getDepartmentFromResultSet(ResultSet resultSet){
+        Department department = new Department();
+        try {
+            
+            department.setId(resultSet.getLong("id"));
+            department.setName(resultSet.getString("name"));
+            department.setMemo(resultSet.getString("memo"));
+            department.setParent(resultSet.getString("parent"));
+            department.setAddress(resultSet.getString("address"));   
+        } catch(SQLException sqle) {
+            sqle.printStackTrace();
+        }        
+        return department;
+    }   
 }
