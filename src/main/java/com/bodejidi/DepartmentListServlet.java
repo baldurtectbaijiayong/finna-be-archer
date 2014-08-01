@@ -20,41 +20,14 @@ public class DepartmentListServlet extends HttpServlet {
         
         String sql = "select * from department";
         DatabaseManager db = new DatabaseManager();
+        DepartmentService departmentService = new DepartmentService();
         
         db.connectAndCreateStatement();
         ResultSet resultSet = db.executeQuery(sql);
-        request.setAttribute("departmentList", addDepartmentToList(resultSet));
+        request.setAttribute("departmentList", departmentService.addDepartmentToList(resultSet));
         db.close();
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
             .forward(request, response);
-    }
-    
-    public Department getDepartmentFromResultSet(ResultSet resultSet){
-        Department department = new Department();
-        try {
-            
-            department.setId(resultSet.getLong("id"));
-            department.setName(resultSet.getString("name"));
-            department.setMemo(resultSet.getString("memo"));
-            department.setParent(resultSet.getString("parent"));
-            department.setAddress(resultSet.getString("address"));   
-        } catch(SQLException sqle) {
-            sqle.printStackTrace();
-        }        
-        return department;
-    }   
-    
-    public List addDepartmentToList(ResultSet resultSet){
-        List<Department> departments = new ArrayList();
-        try{
-            while(resultSet.next()){
-                Department department = getDepartmentFromResultSet(resultSet);
-                departments.add(department);
-            }
-        } catch(SQLException sqle) {
-                sqle.printStackTrace();
-        }
-        return departments;
     }
 }
