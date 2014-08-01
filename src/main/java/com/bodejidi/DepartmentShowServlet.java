@@ -2,10 +2,7 @@ package com.bodejidi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,22 +23,18 @@ public class DepartmentShowServlet extends HttpServlet{
             
         List contacts = new ArrayList();
         Department department = new Department();
+        DepartmentService departmentService = new DepartmentService();
         db.connectAndCreateStatement();
         ResultSet resultSet = db.executeQuery(sql);
         
         try{
             while(resultSet.next()){
                 Contact contact = new Contact();  
-                
                 contact.setId(resultSet.getLong("contact.id"));
                 contact.setName(resultSet.getString("contact.name"));
                 contact.setMobile(resultSet.getString("mobile"));
                 contact.setDepartment(resultSet.getString("department.name"));
-                department.setName(resultSet.getString("department.name"));
-                department.setParent(resultSet.getString("parent"));
-                department.setAddress(resultSet.getString("address"));
-                department.setMemo(resultSet.getString("department.memo"));
-                department.setId(resultSet.getLong("department.id"));
+                department = departmentService.getDepartmentFromResultSet(resultSet);
                 
                 contacts.add(contact);            
             }
