@@ -2,6 +2,8 @@ package com.bodejidi;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,5 +34,18 @@ public class DepartmentService{
                 sqle.printStackTrace();
         }
         return departments;
+    }
+    
+    public Map<String, Object> getAllDepartment(){
+        String sql = "select * from department";
+        DatabaseManager db = new DatabaseManager();
+        DepartmentService departmentService = new DepartmentService();
+        
+        db.connectAndCreateStatement();
+        ResultSet resultSet = db.executeQuery(sql);
+        Map<String, Object> dataModel = new HashMap<String, Object>();
+        dataModel.put("departmentList",addDepartmentToList(resultSet));
+        db.close();
+        return dataModel;   
     }
 }

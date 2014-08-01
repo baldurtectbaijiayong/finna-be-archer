@@ -14,20 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class DepartmentListServlet extends HttpServlet {
+public class DepartmentListServlet extends AbstractFinnalServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
-        
-        String sql = "select * from department";
-        DatabaseManager db = new DatabaseManager();
         DepartmentService departmentService = new DepartmentService();
-        
-        db.connectAndCreateStatement();
-        ResultSet resultSet = db.executeQuery(sql);
-        request.setAttribute("departmentList", departmentService.addDepartmentToList(resultSet));
-        db.close();
-        getServletContext()
-            .getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
-            .forward(request, response);
+        String page = "department/list";
+        render(request,response,page,departmentService.getAllDepartment());
     }
 }
