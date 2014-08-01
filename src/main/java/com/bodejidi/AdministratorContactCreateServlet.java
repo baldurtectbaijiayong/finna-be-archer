@@ -27,9 +27,13 @@ public class AdministratorContactCreateServlet extends HttpServlet {
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
+        DatabaseManager db = new DatabaseManager();
+        
+        db.connectAndCreateStatement();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        
         
         Contact contact = new Contact();
         contact.setName(request.getParameter("contactName"));
@@ -56,15 +60,9 @@ public class AdministratorContactCreateServlet extends HttpServlet {
             
         String sql2 = "select * from department where name='" + contact.getDepartment() +"'";
             
-        try{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch(Exception e){
-            response.getWriter().println(e);
-        }
+        
         
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-            statement = connection.createStatement();
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             resultSet = statement.getGeneratedKeys();
             
@@ -87,30 +85,8 @@ public class AdministratorContactCreateServlet extends HttpServlet {
         } catch(SQLException sqle){
             response.getWriter().println(sqle);
         }
+        db.close();
         
-        if(resultSet != null){
-            try{
-                resultSet.close();
-            }catch(Exception e){
-                response.getWriter().println(e);
-            }
-        }
-        
-        if(statement != null){
-            try{
-                statement.close();
-            }catch(Exception e){
-                response.getWriter().println(e);
-            }
-        }
-        
-        if(connection != null){
-            try{
-                connection.close();
-            }catch(Exception e){
-                response.getWriter().println(e);
-            }
-        }
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/administrator/contact/success.jsp")
             .forward(request, response);   
