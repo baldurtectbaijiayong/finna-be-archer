@@ -19,6 +19,7 @@ public class DepartmentShowServlet extends HttpServlet{
         
         DatabaseManager db = new DatabaseManager();
         DepartmentService departmentService = new DepartmentService();
+        ContactService contactService = new ContactService();
         String sql = "select * from  department,contact,contact_department where "
             + "department.id='" 
             + request.getParameter("departmentId") 
@@ -32,14 +33,8 @@ public class DepartmentShowServlet extends HttpServlet{
         
         try{
             while(resultSet.next()){
-                Contact contact = new Contact();  
-                
-                contact.setId(resultSet.getLong("contact.id"));
-                contact.setName(resultSet.getString("contact.name"));
-                contact.setMobile(resultSet.getString("mobile"));
-                contact.setDepartment(resultSet.getString("department.name"));
+                Contact contact = contactService.createContactFromResultSet(resultSet);
                 department = departmentService.getDepartmentFromResultSet(resultSet);
-                
                 contacts.add(contact);            
             }
         }catch(SQLException sqle){
