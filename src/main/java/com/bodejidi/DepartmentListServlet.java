@@ -20,20 +20,11 @@ public class DepartmentListServlet extends HttpServlet {
         
         String sql = "select * from department";
         DatabaseManager db = new DatabaseManager();
-        List<Department> departments = new ArrayList();
+        
         db.connectAndCreateStatement();
         ResultSet resultSet = db.executeQuery(sql);
-        try{
-            while(resultSet.next()){
-                Department department = getDepartmentFromResultSet(resultSet);
-                departments.add(department);
-            }
-        } catch(SQLException sqle) {
-                sqle.printStackTrace();
-        }
-          
+        request.setAttribute("departmentList", addDepartmentToList(resultSet));
         db.close();
-        request.setAttribute("departmentList", departments);
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/department/list.jsp")
             .forward(request, response);
@@ -53,4 +44,17 @@ public class DepartmentListServlet extends HttpServlet {
         }        
         return department;
     }   
+    
+    public List addDepartmentToList(ResultSet resultSet){
+        List<Department> departments = new ArrayList();
+        try{
+            while(resultSet.next()){
+                Department department = getDepartmentFromResultSet(resultSet);
+                departments.add(department);
+            }
+        } catch(SQLException sqle) {
+                sqle.printStackTrace();
+        }
+        return departments;
+    }
 }
