@@ -16,11 +16,8 @@ import java.io.IOException;
 public class DepartmentShowServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException{
-
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
+        
+        DatabaseManager db = new DatabaseManager();
         String sql = "select * from  department,contact,contact_department where "
             + "department.id='" 
             + request.getParameter("departmentId") 
@@ -29,17 +26,10 @@ public class DepartmentShowServlet extends HttpServlet{
             
         List contacts = new ArrayList();
         Department department = new Department();
-
+        db.connectAndCreateStatement();
+        ResultSet resultSet = db.executeQuery(sql);
+        
         try{
-            Class.forName("com.mysql.jdbc.Driver");	
-        }catch(Exception e){
-            //ignore;
-        }
-        try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-            
             while(resultSet.next()){
                 Contact contact = new Contact();  
                 
@@ -56,8 +46,6 @@ public class DepartmentShowServlet extends HttpServlet{
                 contacts.add(contact);            
             }
         }catch(SQLException sqle){
-            response.getWriter().println("Cannot connection to DB");
-            response.getWriter().println(sqle.getMessage());
             sqle.printStackTrace();	
         }
         
@@ -66,27 +54,7 @@ public class DepartmentShowServlet extends HttpServlet{
         getServletContext()
             .getRequestDispatcher("/WEB-INF/jsp/department/show.jsp")
             .forward(request, response);
-
-        if (resultSet != null){
-            try{
-                resultSet.close();		
-            }catch(SQLException sqle){
-                
-            }
-        }
-        if (statement != null){
-            try{
-                statement.close();		
-            }catch(SQLException sqle){
-                
-            }
-        }
-        if (connection != null){
-            try{
-                connection.close();		
-            }catch(SQLException sqle){
-                
-            }
-        }    
+            
+        db.close();
     }
 }
